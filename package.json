@@ -1,11 +1,11 @@
 
 {
-  "name": "isomorphic-redux-app",
-  "version": "0.1.1",
-  "description": "An example of a isomorphic Redux application",
+  "name": "jenca-gui",
+  "version": "1.0.0",
+  "description": "The front end GUI for jenca-cloud",
   "scripts": {
     "slate": "rm -rf node_modules && npm install",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist/*",
     "start": "NODE_ENV=development node src/server/index.js --progress --colors --profile",
     "start-prod": "NODE_ENV=production node src/server/index.js --progress --colors --profile",
     "build": "npm run clean && NODE_ENV=production webpack -p --progress --colors --profile",
