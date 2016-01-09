@@ -22,3 +22,11 @@ The makefile will run the tests:
 ```bash
 $ make test
 ```
+
+## preview
+
+This command will serve a dev version of the gui on port 80 of the Vagrant VM:
+
+```bash
+$ make start
+```
