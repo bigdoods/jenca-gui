@@ -9,8 +9,7 @@ ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 # the dev version includes development node modules
 images:
 	docker build -t jenca-cloud/$(SERVICE):latest .
-	docker rmi jenca-cloud/$(SERVICE):$(VERSION)
-	docker tag jenca-cloud/$(SERVICE):latest jenca-cloud/$(SERVICE):$(VERSION)
+	docker tag -f jenca-cloud/$(SERVICE):latest jenca-cloud/$(SERVICE):$(VERSION)
 
 test:
 	docker run -ti --rm \
