@@ -1,4 +1,4 @@
-.PHONY: images test build start
+.PHONY: images test build
 
 VERSION = 1.0.0
 SERVICE = jenca-gui
@@ -19,8 +19,3 @@ build:
 	docker run -ti --rm \
 		-v $(ROOT_DIR)/dist:/app/dist \
 		jenca-cloud/$(SERVICE):$(VERSION) build
-
-start:
-	docker run -ti --rm \
-		-p 80:3002 \
-		jenca-cloud/$(SERVICE):$(VERSION) start
