@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "react": "^0.14.1",
-    "react-dom": "^0.14.1"
+    "react-dom": "^0.14.7"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",
