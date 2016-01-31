@@ -1,0 +1,41 @@
+{
+  "name": "jenca-gui",
+  "private": true,
+  "version": "1.0.0",
+  "description": "The frontend code for the Jenca GUI",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jenca-cloud/jenca-gui.git"
+  },
+  "keywords": [
+    "jenca",
+    "gui"
+  ],
+  "author": "Jenca",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jenca-cloud/jenca-gui/issues"
+  },
+  "homepage": "https://github.com/jenca-cloud/jenca-gui#readme",
+  "scripts": {
+    "clean": "rm -rf dist && mkdir -p dist",
+    "indexpage": "cp src/index.html dist/index.html",
+    "watch": "WEBPACK_ARGS=--watch npm run build",
+    "prebuild": "npm run clean && npm run indexpage",
+    "build": "webpack $WEBPACK_ARGS",
+    "prerelease": "npm run clean && npm run indexpage",
+    "release": "RELEASE=y webpack $WEBPACK_ARGS"
+  },
+  "dependencies": {
+    "react": "^0.14.1",
+    "react-dom": "^0.14.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "webpack": "^1.12.12"
+  }
+}
