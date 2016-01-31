@@ -1,21 +1,21 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { createStore } from 'redux'
+import Counter from './components/Counter'
+import counter from './reducers'
 
-var HelloMessage = React.createClass({
-  getInitialState: function() {
-    return {
-      count:0
-    }
-  },
-  clickMe: function() {
-    this.setState({
-      count:this.state.count+1
-    })
-  },
-  render: function () {
-    return <h1>Hello {this.props.message}! <a href="#" onClick={this.clickMe}>CliCk ME</a> - {this.state.count}</h1>;
-  }
-});
+const store = createStore(counter)
+const rootEl = document.getElementById('app')
 
-var node = document.getElementById('app');
-ReactDOM.render(<HelloMessage message="World" />, node);  
+function render() {
+  ReactDOM.render(
+    <Counter
+      value={store.getState()}
+      onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
+      onDecrement={() => store.dispatch({ type: 'DECREMENT' })} />,
+    rootEl  
+  )
+}
+
+render()
+store.subscribe(render)
