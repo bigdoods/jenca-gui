@@ -25,7 +25,8 @@
     "prebuild": "npm run clean && npm run indexpage",
     "build": "webpack $WEBPACK_ARGS",
     "prerelease": "npm run clean && npm run indexpage",
-    "release": "RELEASE=y webpack $WEBPACK_ARGS"
+    "release": "RELEASE=y webpack $WEBPACK_ARGS",
+    "serve": "cd dist && ecstatic"
   },
   "dependencies": {
     "react": "^0.14.1",
@@ -38,6 +39,7 @@
     "babel-loader": "^6.2.1",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
+    "ecstatic": "^1.4.0",
     "webpack": "^1.12.12"
   }
 }
