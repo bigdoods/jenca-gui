@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import Header from './Header'
 import Menubar from './Menubar'
 import ContentPane from './ContentPane'
@@ -15,7 +15,9 @@ class Layout extends Component {
                 mdl-layout--fixed-header">
         <Header />
         <Menubar />
-        <ContentPane />
+        <main className="mdl-layout__content">
+          <div className="page-content">Content here</div>
+        </main>
       </div>
     )
   }

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 
 class Menubar extends Component {
   constructor(props) {
@@ -11,10 +12,9 @@ class Menubar extends Component {
       <div className="mdl-layout__drawer">
         <span className="mdl-layout-title">Title</span>
         <nav className="mdl-navigation">
-          <a className="mdl-navigation__link" href="">Link</a>
-          <a className="mdl-navigation__link" href="">Link</a>
-          <a className="mdl-navigation__link" href="">Link</a>
-          <a className="mdl-navigation__link" href="">Link</a>
+          <Link className="mdl-navigation__link" to="/">Home</Link>
+          <Link className="mdl-navigation__link" to="/foo">Foo</Link>
+          <Link className="mdl-navigation__link" to="/bar">Bar</Link>
         </nav>
       </div>
     )
