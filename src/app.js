@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux'
@@ -5,6 +6,8 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import createHistory from 'history/lib/createHashHistory'
 import { syncHistory, routeReducer } from 'react-router-redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
 
 /*
 
@@ -25,11 +28,18 @@ import Bar from "./components/Bar";
 
 /*
 
-  history
+  history/logging
   
 */
 const history = createHistory()
-const middleware = syncHistory(history)
+const routerMiddleware = syncHistory(history)
+const loggerMiddleware = createLogger()
+
+/*
+
+  reducer
+  
+*/
 const reducer = combineReducers({
   ...reducers,
   routing: routeReducer
@@ -41,10 +51,14 @@ const reducer = combineReducers({
   
 */
 const finalCreateStore = compose(
-  applyMiddleware(middleware)
+  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware,
+    routerMiddleware
+  )
 )(createStore)
+
 const store = finalCreateStore(reducer)
-middleware.listenForReplays(store)
 
 /*
 
