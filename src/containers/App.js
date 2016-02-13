@@ -1,12 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 
 import Layout from '../components/Layout'
 
 class App extends Component {
-
   render() {
     return (
       <Layout push={this.props.push}>

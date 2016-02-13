@@ -1,21 +1,19 @@
 'use strict';
 
 var path = require('path')
-var webpack = require('webpack');
+var webpack = require('webpack')
 
-var RELEASE = process.env.RELEASE ? true : false;
+const RELEASE = process.env.RELEASE ? true : false
 
 module.exports = {
-
-  entry: path.resolve(__dirname, 'src', 'app.js'),
+  devtool: 'source-map',
+  entry: [
+    './src/app'
+  ],
     
   output: {
-    filename: 'app.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx']
+    path: path.join(__dirname, 'dist'),
+    filename: 'app.js'
   },
 
   plugins: RELEASE ? [
@@ -34,7 +32,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react', 'stage-1']
         }
       }
 
