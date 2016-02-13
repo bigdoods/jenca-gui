@@ -13,9 +13,6 @@ export default function update(state = initialState, action) {
         loading: true
       })
     case PROJECTS_RECEIVE:
-    console.log('-------------------------------------------');
-    console.dir(state)
-    console.dir(action)
       return Object.assign({}, state, {
         loading: false,
         error: null,

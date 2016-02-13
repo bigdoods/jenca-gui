@@ -34,7 +34,7 @@ export default function ajax(opts, actions){
       .then(function(response){
 
         if (!response.ok) {
-          return dispatch(errorAction(body, response))
+          return dispatch(errorAction(response.text(), response))
         }
 
         return (opts.json ? response.json() : response.text())
