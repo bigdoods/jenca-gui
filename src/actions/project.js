@@ -1,4 +1,4 @@
-import getApi from './api'
+import { json } from '../api/ajax'
 import { PROJECTS_API } from '../apiurls'
 
 export const PROJECTS_REQUEST = 'PROJECTS_REQUEST'
@@ -26,7 +26,7 @@ function projectsError(error) {
 
 export function fetchProjects() {
 
-  return getApi(PROJECTS_API, [
+  return json(PROJECTS_API, [
     projectsRequest,
     projectsReceive,
     projectsError
