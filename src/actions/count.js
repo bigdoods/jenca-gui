@@ -1,4 +1,5 @@
-import { INCREASE, DECREASE } from '../constants'
+export const INCREASE = 'INCREASE'
+export const DECREASE = 'DECREASE'
 
 export function increase(n) {
   return {

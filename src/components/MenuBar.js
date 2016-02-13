@@ -2,10 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
 class Menubar extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     //const { value, onIncrement, onDecrement } = this.props
     return (

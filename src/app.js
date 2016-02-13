@@ -6,9 +6,28 @@ import { Router, Route, IndexRoute } from 'react-router'
 import createHistory from 'history/lib/createHashHistory'
 import { syncHistory, routeReducer } from 'react-router-redux'
 
-import * as reducers from './reducers'
-import { App, Home, Foo, Bar } from './components'
+/*
 
+  reducers
+  
+*/
+import * as reducers from './reducers'
+
+/*
+
+  containers
+  
+*/
+import App from "./containers/App";
+import Home from "./containers/Home";
+import Foo from "./components/Foo";
+import Bar from "./components/Bar";
+
+/*
+
+  history
+  
+*/
 const history = createHistory()
 const middleware = syncHistory(history)
 const reducer = combineReducers({
@@ -16,12 +35,22 @@ const reducer = combineReducers({
   routing: routeReducer
 })
 
+/*
+
+  store
+  
+*/
 const finalCreateStore = compose(
   applyMiddleware(middleware)
 )(createStore)
 const store = finalCreateStore(reducer)
 middleware.listenForReplays(store)
 
+/*
+
+  routes
+  
+*/
 ReactDOM.render(
   <Provider store={store}>
     <div>
