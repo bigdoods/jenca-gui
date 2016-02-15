@@ -3,7 +3,11 @@
 var path = require('path')
 var webpack = require('webpack')
 
-const RELEASE = process.env.RELEASE ? true : false
+var RELEASE = process.env.RELEASE ? true : false;
+
+var nodeEnvPlugin = new webpack.DefinePlugin({
+  'process.env.NODE_ENV': process.env.NODE_ENV == 'production' ? '"production"' : '"development"'
+})
 
 module.exports = {
   devtool: RELEASE ? [] : [
@@ -19,13 +23,19 @@ module.exports = {
   },
 
   plugins: RELEASE ? [
+    // development plugins
+    nodeEnvPlugin,
+
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
         warnings: false
       }
     })
-  ] : [],
+  ] : [
+    // production plugins
+    nodeEnvPlugin
+  ],
 
   module: {
     loaders: [

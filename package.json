@@ -24,7 +24,7 @@
     "watch": "WEBPACK_ARGS=--watch npm run build",
     "prebuild": "npm run clean && npm run indexpage",
     "build": "webpack $WEBPACK_ARGS",
-    "release": "RELEASE=y npm run build",
+    "release": "NODE_ENV=production npm run build",
     "serve": "node devServer.js"
   },
   "dependencies": {
