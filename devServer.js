@@ -12,6 +12,7 @@ function getJsonFile(path){
   }
 }
 
+app.get('/v1/user', getJsonFile('./test/fixtures/user.json'))
 app.get('/v1/projects', getJsonFile('./test/fixtures/projects.json'))
 app.get('*', ecstatic({ root: __dirname + '/dist' }))
 
