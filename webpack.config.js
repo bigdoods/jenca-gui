@@ -3,10 +3,10 @@
 var path = require('path')
 var webpack = require('webpack')
 
-var RELEASE = process.env.RELEASE ? true : false;
+var RELEASE = process.env.NODE_ENV == 'production' ? true : false;
 
 var nodeEnvPlugin = new webpack.DefinePlugin({
-  'process.env.NODE_ENV': process.env.NODE_ENV == 'production' ? '"production"' : '"development"'
+  'process.env.NODE_ENV': RELEASE ? '"production"' : '"development"'
 })
 
 module.exports = {
