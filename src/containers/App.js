@@ -16,7 +16,6 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  console.dir(state)
   return {}
 }
 

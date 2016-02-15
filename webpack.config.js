@@ -6,7 +6,9 @@ var webpack = require('webpack')
 const RELEASE = process.env.RELEASE ? true : false
 
 module.exports = {
-  
+  devtool: [
+    'source-map'
+  ],
   entry: [
     './src/app'
   ],
