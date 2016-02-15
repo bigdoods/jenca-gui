@@ -45,17 +45,22 @@ const reducer = combineReducers({
   routing: routeReducer
 })
 
+var middlewareArray = [
+  thunkMiddleware,
+  routerMiddleware
+]
+
+if(process.env.NODE_ENV==='development'){
+  middlewareArray.push(loggerMiddleware)
+}
+
 /*
 
   store
   
 */
 const finalCreateStore = compose(
-  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware,
-    routerMiddleware
-  )
+  applyMiddleware.apply(null, middlewareArray)
 )(createStore)
 
 const store = finalCreateStore(reducer)
