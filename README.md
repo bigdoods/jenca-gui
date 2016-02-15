@@ -30,3 +30,26 @@ This command will serve a dev version of the gui on port 80 of the Vagrant VM:
 ```bash
 $ make start
 ```
+
+## state shape
+
+The following is an example of the state tree we pass to redux:
+
+```js
+var state = {
+  
+  projects:{
+    loaded: '{boolean,notnull}',
+    loading: '{boolean,notnull}',
+    error: '{string}',
+    data: '{array}
+  },
+
+  user:{
+    loaded: '{boolean,notnull}',
+    loading: '{boolean,notnull}',
+    error: '{string}',
+    data: '{object}
+  }
+}
+```
