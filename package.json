@@ -21,10 +21,11 @@
   "scripts": {
     "clean": "rm -rf dist && mkdir -p dist",
     "indexpage": "cp src/index.html dist/index.html",
-    "watch": "WEBPACK_ARGS=--watch npm run build",
-    "prebuild": "npm run clean && npm run indexpage",
-    "build": "NODE_ENV=development webpack $WEBPACK_ARGS",
-    "release": "NODE_ENV=production npm run build",
+    "watch": "WEBPACK_ARGS=--watch npm run webpack",
+    "prewebpack": "npm run clean && npm run indexpage",
+    "webpack": "webpack $WEBPACK_ARGS",
+    "build": "NODE_ENV=development npm run webpack",
+    "release": "NODE_ENV=production npm run webpack",
     "serve": "node devServer.js",
     "test": "NODE_ENV=test mocha --compilers js:babel-core/register --recursive --require ./src/test/setup.js src/test",
     "test:watch": "npm test -- --watch"
