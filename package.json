@@ -52,6 +52,7 @@
     "express": "^4.13.4",
     "mocha": "^2.4.5",
     "nock": "^7.0.2",
+    "react-addons-test-utils": "^0.14.7",
     "redux-mock-store": "0.0.6",
     "webpack": "^1.12.12"
   }
