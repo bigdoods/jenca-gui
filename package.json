@@ -20,9 +20,10 @@
   "homepage": "https://github.com/jenca-cloud/jenca-gui#readme",
   "scripts": {
     "clean": "rm -rf dist && mkdir -p dist",
-    "indexpage": "cp src/index.html dist/index.html",
+    "indexpage": "cp src/index.offline.html dist/index.html",
+    "assets": "npm run indexpage && cp src/assets/* dist",
     "watch": "WEBPACK_ARGS=--watch npm run webpack",
-    "prewebpack": "npm run clean && npm run indexpage",
+    "prewebpack": "npm run clean && npm run assets",
     "webpack": "webpack $WEBPACK_ARGS",
     "build": "NODE_ENV=development npm run webpack",
     "release": "NODE_ENV=production npm run webpack",
