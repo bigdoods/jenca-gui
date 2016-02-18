@@ -20,11 +20,11 @@ function mapStateToProps(state) {
     url:'/',
     title:'Home'
   },{
-    url:'/foo',
-    title:'Foo'
+    url:'/library',
+    title:'Library'
   },{
-    url:'/bar',
-    title:'Bar'
+    url:'/projects',
+    title:'Projects'
   }] : [{
     url:'/',
     title:'Login'
