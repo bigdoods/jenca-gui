@@ -4,6 +4,7 @@ import { routeActions } from 'react-router-redux'
 
 import { fetchUser } from '../actions/user'
 import Layout from '../components/Layout'
+import Login from '../components/Login'
 
 export class App extends Component {
   render() {
@@ -12,9 +13,11 @@ export class App extends Component {
       this.props.fetchUser()
     }
 
+    var children = this.props.loggedIn ? this.props.children : <Login />
+
     return (
       <Layout loggedIn={this.props.loggedIn}>
-        {this.props.children}
+        {children}
       </Layout>
     )
   }
