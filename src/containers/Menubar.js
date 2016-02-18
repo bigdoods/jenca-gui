@@ -2,14 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 
-import Layout from '../components/Layout'
+import Menubar from '../components/Menubar'
 
-export class App extends Component {
+export class MenubarContainer extends Component {
   render() {
     return (
-      <Layout>
-        {this.props.children}
-      </Layout>
+      <Menubar links={this.props.links} />
     )
   }
   
@@ -17,9 +15,24 @@ export class App extends Component {
 
 function mapStateToProps(state) {
   var loggedIn = state.user && state.user.loaded && state.user.data
-  
+
+  var links = loggedIn ? [{
+    url:'/',
+    title:'Home'
+  },{
+    url:'/foo',
+    title:'Foo'
+  },{
+    url:'/bar',
+    title:'Bar'
+  }] : [{
+    url:'/login',
+    title:'Login'
+  }]
+
   return {
-    loggedIn:loggedIn
+    loggedIn:loggedIn,
+    links:links
   }
 }
 
@@ -32,4 +45,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(MenubarContainer)

@@ -8,9 +8,13 @@ class Menubar extends Component {
       <div className="mdl-layout__drawer">
         <span className="mdl-layout-title">Title</span>
         <nav className="mdl-navigation">
-          <Link className="mdl-navigation__link" to="/">Home</Link>
-          <Link className="mdl-navigation__link" to="/foo">Foo</Link>
-          <Link className="mdl-navigation__link" to="/bar">Bar</Link>
+        {
+          this.props.links.map(function(link){
+            return (
+              <Link className="mdl-navigation__link" key={link.url} to={link.url}>{link.title}</Link>
+            )
+          })
+        }
         </nav>
       </div>
     )
