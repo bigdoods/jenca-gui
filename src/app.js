@@ -65,8 +65,6 @@ const finalCreateStore = compose(
 
 const store = finalCreateStore(reducer)
 
-console.log('-------------------------------------------');
-console.dir(process.env.NODE_ENV)
 /*
 
   routes
