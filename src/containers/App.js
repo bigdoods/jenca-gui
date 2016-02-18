@@ -9,8 +9,9 @@ export class App extends Component {
   render() {
 
     if(this.props.shouldLoadUser){
-      console.log('loading user data for the ifrst time')
+      this.props.fetchUser()
     }
+
     return (
       <Layout loggedIn={this.props.loggedIn}>
         {this.props.children}
@@ -34,7 +35,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchUser:function(){
-      dispath(fetchUser())
+      dispatch(fetchUser())
     }
   }
 }
