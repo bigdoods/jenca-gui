@@ -26,7 +26,7 @@ function mapStateToProps(state) {
     url:'/bar',
     title:'Bar'
   }] : [{
-    url:'/login',
+    url:'/',
     title:'Login'
   }]
 
