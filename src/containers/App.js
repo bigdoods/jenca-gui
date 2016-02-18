@@ -7,7 +7,7 @@ import Layout from '../components/Layout'
 export class App extends Component {
   render() {
     return (
-      <Layout>
+      <Layout loggedIn={this.props.loggedIn}>
         {this.props.children}
       </Layout>
     )
