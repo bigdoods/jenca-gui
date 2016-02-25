@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Header from './Header'
-import Menubar from './Menubar'
+import Menubar from './MenuBar'
 
 class Layout extends Component {
   render() {
