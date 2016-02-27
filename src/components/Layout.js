@@ -1,21 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import Header from './Header'
-import Menubar from './Menubar'
-import ContentPane from './ContentPane'
+import Menubar from '../containers/Menubar'
 
 class Layout extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
-    //const { value, onIncrement, onDecrement } = this.props
     return (
-      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
-                mdl-layout--fixed-header">
-        <Header />
+      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+        <Header loggedIn={this.props.loggedIn} />
         <Menubar />
-        <ContentPane />
+        <main className="mdl-layout__content">
+          <div className="page-content">{this.props.children}</div>
+        </main>
       </div>
     )
   }

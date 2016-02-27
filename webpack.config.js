@@ -1,31 +1,41 @@
 'use strict';
 
 var path = require('path')
-var webpack = require('webpack');
+var webpack = require('webpack')
 
-var RELEASE = process.env.RELEASE ? true : false;
+var RELEASE = process.env.NODE_ENV == 'production' ? true : false;
+
+var nodeEnvPlugin = new webpack.DefinePlugin({
+  'process.env.NODE_ENV': RELEASE ? '"production"' : '"development"'
+})
 
 module.exports = {
-
-  entry: path.resolve(__dirname, 'src', 'app.js'),
+  devtool: RELEASE ? [] : [
+    'inline-source-map'
+  ],
+  entry: [
+    './src/app'
+  ],
     
   output: {
-    filename: 'app.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx']
+    path: path.join(__dirname, 'dist'),
+    filename: 'app.js'
   },
 
   plugins: RELEASE ? [
+    // development plugins
+    nodeEnvPlugin,
+
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
         warnings: false
       }
     })
-  ] : [],
+  ] : [
+    // production plugins
+    nodeEnvPlugin
+  ],
 
   module: {
     loaders: [
@@ -34,7 +44,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react', 'stage-1']
         }
       }
 

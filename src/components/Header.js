@@ -1,24 +1,24 @@
 import React, { Component, PropTypes } from 'react'
 
-class ContentPane extends Component {
-  constructor(props) {
-    super(props)
-  }
+class Header extends Component {
 
   render() {
     //const { value, onIncrement, onDecrement } = this.props
     return (
-      <main className="mdl-layout__content">
-        <div className="page-content">Content here</div>
-      </main>
+      <header className="mdl-layout__header">
+        <div className="mdl-layout__header-row">
+          <div className="mdl-layout-spacer"></div>
+          
+        </div>
+      </header>
     )
   }
 }
 
-ContentPane.propTypes = {
+Header.propTypes = {
   //value: PropTypes.number.isRequired,
   //onIncrement: PropTypes.func.isRequired,
   //onDecrement: PropTypes.func.isRequired
 }
 
-export default ContentPane
+export default Header

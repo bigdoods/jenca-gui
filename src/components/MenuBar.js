@@ -1,20 +1,20 @@
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 
 class Menubar extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     //const { value, onIncrement, onDecrement } = this.props
     return (
       <div className="mdl-layout__drawer">
         <span className="mdl-layout-title">Title</span>
         <nav className="mdl-navigation">
-          <a className="mdl-navigation__link" href="">Link</a>
-          <a className="mdl-navigation__link" href="">Link</a>
-          <a className="mdl-navigation__link" href="">Link</a>
-          <a className="mdl-navigation__link" href="">Link</a>
+        {
+          this.props.links.map(function(link){
+            return (
+              <Link className="mdl-navigation__link" key={link.url} to={link.url}>{link.title}</Link>
+            )
+          })
+        }
         </nav>
       </div>
     )
