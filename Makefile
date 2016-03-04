@@ -19,3 +19,9 @@ build:
 	docker run -ti --rm \
 		-v $(ROOT_DIR)/dist:/app/dist \
 		jenca-cloud/$(SERVICE):$(VERSION) build
+
+
+start:
+	docker run -ti --rm \
+		-v $(ROOT_DIR)/dist:/app/dist \
+		jenca-cloud/$(SERVICE):$(VERSION)
