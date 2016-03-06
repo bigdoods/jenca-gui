@@ -3,6 +3,8 @@ MAINTAINER connor@jenca.io
 WORKDIR /app
 COPY package.json /app/package.json
 RUN npm install
-COPY . /app
+# mount the code at runtime to /app/code
+RUN mkdir -p /app/code
+WORKDIR /app/code
 ENTRYPOINT ["npm", "run"]
 CMD ["build"]

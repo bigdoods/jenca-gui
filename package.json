@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/jenca-cloud/jenca-gui#readme",
   "scripts": {
-    "clean": "rm -rf dist && mkdir -p dist",
+    "clean": "mkdir -p dist && rm -rf dist/*",
     "indexpage": "cp src/index.offline.html dist/index.html",
     "assets": "npm run indexpage && cp src/assets/* dist",
     "watch": "WEBPACK_ARGS=--watch npm run webpack",
