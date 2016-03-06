@@ -6,7 +6,7 @@ The front end GUI for jenca-cloud
 
 You need an environment with Docker and make installed
 
-NOTE: if you want to run the build locally (i.e. outside of Docker) - you need the latest node.js `5.4.0`.
+NOTE: if you want to run the build locally (i.e. outside of Docker) - you need the latest node.js `5.2.0`.
 
 An easy way to do this (on Linux at least) is to use [nvm](https://github.com/creationix/nvm)
 
