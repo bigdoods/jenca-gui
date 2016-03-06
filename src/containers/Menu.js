@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
 
-import Menubar from '../components/Menubar'
+import Menu from '../components/Menu'
 
-export class MenubarContainer extends Component {
+export class MenuContainer extends Component {
   render() {
     return (
-      <Menubar links={this.props.links} />
+      <Menu links={this.props.links} />
     )
   }
   
@@ -45,4 +45,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MenubarContainer)
+)(MenuContainer)
