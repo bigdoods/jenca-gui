@@ -41,6 +41,17 @@ This command will serve a dev version of the gui on port 80 of the Vagrant VM:
 $ make start
 ```
 
+## local development
+
+If you want to have file watchers active for automatic rebuild - you need to run the build locally:
+
+```
+$ npm install
+$ npm run build
+$ npm run watch
+$ npm test
+```
+
 ## state shape
 
 The following is an example of the state tree we pass to redux:
