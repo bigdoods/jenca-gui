@@ -3,8 +3,9 @@ MAINTAINER connor@jenca.io
 WORKDIR /app
 COPY package.json /app/package.json
 RUN npm install
-# mount the code at runtime to /app/code
-RUN mkdir -p /app/code
-WORKDIR /app/code
+# mount the code (src) at runtime to /app/src
+COPY ./src /app/src
+COPY ./.babelrc /app/.babelrc
+COPY ./webpack.config.js /app/webpack.config.js
 ENTRYPOINT ["npm", "run"]
 CMD ["build"]

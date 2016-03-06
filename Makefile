@@ -21,16 +21,13 @@ prodimage:
 	docker build -f Dockerfile -t $(HUBACCOUNT)/$(SERVICE):latest .
 	docker tag $(HUBACCOUNT)/$(SERVICE):latest $(HUBACCOUNT)/$(SERVICE):$(VERSION)
 
-#docker run -ti --rm \
-#	$(HUBACCOUNT)/$(SERVICE):$(VERSION)-dev test
 test:
-	@echo
-	@echo "the tests currently dont run in containers - please type npm install && npm test"
-	@echo
+	docker run -ti --rm \
+		$(HUBACCOUNT)/$(SERVICE):$(VERSION)-dev test
 
 build.dist:
 	docker run -ti --rm \
-	  -v $(ROOT_DIR):/app/code \
+	  -v $(ROOT_DIR)/src:/app/src \
 		$(HUBACCOUNT)/$(SERVICE):$(VERSION)-dev build
 
 build: build.dist prodimage
