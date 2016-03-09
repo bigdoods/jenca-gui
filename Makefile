@@ -6,7 +6,7 @@ HUBACCOUNT = jenca
 
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-images: devimage prodimage
+images: build
 
 # build the docker images
 # the dev version includes development node modules
@@ -28,6 +28,7 @@ test:
 build.dist:
 	docker run -ti --rm \
 	  -v $(ROOT_DIR)/src:/app/src \
-		$(HUBACCOUNT)/$(SERVICE):$(VERSION)-dev build
+	  -v $(ROOT_DIR)/dist:/app/dist \
+		$(HUBACCOUNT)/$(SERVICE):$(VERSION)-dev release
 
 build: build.dist prodimage
