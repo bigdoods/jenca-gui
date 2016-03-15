@@ -12,6 +12,13 @@ function getJsonFile(path){
   }
 }
 
+app.get('/v1/auth/status', function(req, res){
+  res.json({
+    is_authenticated:process.env.IS_AUTHENTICATED ? true : false,
+    email:process.env.USER_EMAIL || 'bob@bob.com'
+  })
+})
+
 app.get('/v1/user', getJsonFile('./src/test/fixtures/user.json'))
 app.get('/v1/projects', getJsonFile('./src/test/fixtures/projects.json'))
 app.get('*', ecstatic({ root: __dirname + '/dist' }))
