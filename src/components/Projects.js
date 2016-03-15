@@ -1,31 +1,22 @@
 import React from 'react'
 
+import ProjectItem from "./ProjectItem"
+import AddProject from "./AddProject"
+
 export default function Projects() {
   return (
 	  <div>
-	  	Here are your projects:
+	  	Current projects:
 
-		<ul class="demo-list-item mdl-list">
-		  <li class="mdl-list__item">
-		    <span class="mdl-list__item-primary-content">
-		      Project Name
-		    </span>
-		  </li>
-		  <li class="mdl-list__item">
-		    <span class="mdl-list__item-primary-content">
-		      Project Name
-		    </span>
-		  </li>
-		  <li class="mdl-list__item">
-		    <span class="mdl-list__item-primary-content">
-		      Project Name
-		    </span>
-		  </li>
-		</ul>
+	  	  <div className="demo-grid-ruler mdl-grid">
+	        <ProjectItem />
+	        <ProjectItem />
+	        <ProjectItem />
+	      </div>
 
-	  	<button className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-		  <i className="material-icons">add</i>
-		</button>
+	      <div>
+	      	<AddProject />
+	      </div>
 	  </div>
   )
 }
