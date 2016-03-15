@@ -8,12 +8,7 @@ export function Home({ number, increase, decrease, fetchProjects, fetchUser }) {
 
   return (
     <div>
-      Some state changes HELLO:
-      {number}
-      <button onClick={() => increase(1)}>Increase</button>
-      <button onClick={() => decrease(1)}>Decrease</button>
-      <button onClick={() => fetchProjects()}>Load Project Data</button>
-      <button onClick={() => fetchUser()}>Load User Data</button>
+      Welcome to Jenca.
     </div>
   )
 }

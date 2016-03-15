@@ -6,7 +6,7 @@ class Menubar extends Component {
     //const { value, onIncrement, onDecrement } = this.props
     return (
       <div className="mdl-layout__drawer">
-        <span className="mdl-layout-title">Title</span>
+        <span className="mdl-layout-title">Jenca</span>
         <nav className="mdl-navigation">
         {
           this.props.links.map(function(link){

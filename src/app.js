@@ -23,8 +23,9 @@ import * as reducers from './reducers'
 */
 import App from "./containers/App";
 import Home from "./containers/Home";
-import Foo from "./components/Foo";
-import Bar from "./components/Bar";
+import Library from "./components/Library";
+import Projects from "./components/Projects";
+import AddProject from "./components/AddProject"
 
 /*
 
@@ -76,8 +77,9 @@ ReactDOM.render(
       <Router history={history}>
         <Route path="/" component={App}>
           <IndexRoute component={Home}/>
-          <Route path="foo" component={Foo}/>
-          <Route path="bar" component={Bar}/>
+          <Route path="library" component={Library}/>
+          <Route path="projects" component={Projects}/>
+            <Route path="projects" component={AddProject}/>
         </Route>
       </Router>
     </div>
