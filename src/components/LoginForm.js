@@ -37,7 +37,6 @@ export default function LoginForm({mode, handleSwitch, handleRegister, handleLog
         
       </main>
     </div>
-  	
   )
 }
 
