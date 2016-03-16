@@ -3,13 +3,14 @@ const express = require('express')
 const ecstatic = require('ecstatic')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-
+const uuid = require('uuid')
 const app = express()
 
 app.use(cookieParser('cookiesecret'))
 app.use(bodyParser.json())
 
 var users = {}
+var projects = {}
 
 function login(email, password){
   var userpassword = users[email]
@@ -89,7 +90,25 @@ app.post('/v1/auth/logout', function(req, res){
 })
 
 app.get('/v1/library', getJsonFile('./src/test/fixtures/library.json'))
-app.get('/v1/projects', getJsonFile('./src/test/fixtures/projects.json'))
+app.get('/v1/projects', function(req, res){
+  res.json(Object.keys(projects || {}).map(function(key){
+    return projects[key]
+  }))
+})
+app.post('/v1/projects', function(req, res){
+  var project = req.body
+  project.uuid = uuid.v1()
+  project.runState = {}
+
+  projects[project.id] = project
+  
+  res.json(project)
+})
+app.post('/v1/projects/:id/status', function(req, res){
+  console.log('-------------------------------------------');
+  res.json({})
+})
+
 app.get('*', ecstatic({ root: __dirname + '/dist' }))
 
 app.listen(3000, 'localhost', (err) => {
