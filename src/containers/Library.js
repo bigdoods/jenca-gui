@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Spinner } from 'react-mdl'
 
@@ -7,25 +7,29 @@ import { createProject } from '../actions/createproject'
 
 import LibraryComponent from '../components/Library'
 
-export function Library(props) {
 
-  if(!props.loaded && !props.loading){
-    props.loadLibrary()
-  }
+class Library extends Component {
+  render() {
 
-  if(!props.loaded){
-    return <Spinner />
-  }
+    var props = this.props
+    if(!props.loaded){
+      return <Spinner />
+    }
 
-  if(props.error){
+    if(props.error){
+      return (
+        <div>error: {props.error}</div>
+      )
+    }
+
     return (
-      <div>error: {props.error}</div>
+      <LibraryComponent {...props} />
     )
   }
 
-  return (
-    <LibraryComponent {...props} />
-  )
+  componentWillMount() {
+    this.props.loadLibrary()
+  }
 }
 
 

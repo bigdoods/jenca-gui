@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Spinner } from 'react-mdl'
 
@@ -6,27 +6,29 @@ import { fetchProjects } from '../actions/project'
 
 import ProjectsComponent from '../components/Projects'
 
-export function Projects(props) {
+class Projects extends Component {
+  render() {
+    var props = this.props
 
-  if(!props.loaded && !props.loading){
-    props.loadProjects()
-  }
+    if(!props.loaded){
+      return <Spinner />
+    }
 
-  if(!props.loaded){
-    return <Spinner />
-  }
+    if(props.error){
+      return (
+        <div>error: {props.error}</div>
+      )
+    }
 
-  if(props.error){
     return (
-      <div>error: {props.error}</div>
+      <ProjectsComponent {...props} />
     )
   }
 
-  return (
-    <ProjectsComponent {...props} />
-  )
+  componentWillMount() {
+    this.props.loadProjects()
+  }
 }
-
 
 function mapStateToProps(state) {
 

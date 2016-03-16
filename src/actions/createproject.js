@@ -1,4 +1,5 @@
 import request from 'superagent'
+import { push } from 'react-router-redux'
 
 import { PROJECTS_API } from '../api/urls'
 
@@ -56,8 +57,8 @@ export function createProject(app) {
             })
           }
 
-          console.log('-------------------------------------------');
-          console.dir(res.body)
+          
+          dispatch(push('/'))
 
         })
 
