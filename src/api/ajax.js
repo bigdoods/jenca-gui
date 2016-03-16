@@ -29,28 +29,30 @@ export default function ajax(opts, actions){
 
   return function(dispatch){
 
-    dispatch(requestAction())
+    setTimeout(function(){
+      dispatch(requestAction())
 
-    var req = request[opts.method](opts.url)
+      var req = request[opts.method](opts.url)
 
-    req = req
-      .set('Accept', 'application/json')
-      .set('Content-Type', 'application/json')
+      req = req
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
 
-    if(opts.body){
-      req = req.send(opts.body)
-    }
-
-    req.end(function(err, res){
-
-      if(err){
-        dispatch(errorAction(err.toString(), res))
+      if(opts.body){
+        req = req.send(opts.body)
       }
-      else{
-        dispatch(receiveAction(res.body, res)) 
-      }
-      
-    })
+
+      req.end(function(err, res){
+
+        if(err){
+          dispatch(errorAction(err.toString(), res))
+        }
+        else{
+          dispatch(receiveAction(res.body, res)) 
+        }
+        
+      })
+    },1)
 
   }
 }
