@@ -14,7 +14,8 @@ export default function apiAction(opts, actions){
     return {
       type: receiveAction,
       data: json,
-      headers: response.headers
+      headers: response.headers,
+      statusCode: response.statusCode,
     }
   }
 

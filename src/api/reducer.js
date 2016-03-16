@@ -19,14 +19,18 @@ export default function apiReducer(actions = []){
           loading: false,
           loaded: true,
           error: null,
-          data: action.data
+          data: action.data,
+          statusCode: action.statusCode,
+          headers: action.headers
         })
       case actions[2]:
         return Object.assign({}, state, {
           loading: false,
           loaded: true,
           error: action.error,
-          data: null
+          data: null,
+          statusCode: action.statusCode,
+          headers: action.headers
         })
       default:
         return state
