@@ -15,22 +15,6 @@ import request from 'superagent'
 
 */
 
-function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response
-  } else {
-    var error = new Error(response.statusText)
-    error.response = response
-    throw error
-  }
-}
-
-function parseJSON(response, opts) {
-  console.log('-------------------------------------------');
-  console.log(response.body.toString())
-  return opts.json ? response.json() : response.text()
-}
-
 export default function ajax(opts, actions){
 
   var requestAction, receiveAction, errorAction

@@ -1,8 +1,24 @@
 const path = require('path')
 const express = require('express')
 const ecstatic = require('ecstatic')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 
 const app = express()
+
+app.use(cookieParser('cookiesecret'))
+app.use(bodyParser.json())
+
+var users = {}
+
+function login(email, password){
+  var user = users[email]
+  return user && user.password==password
+}
+
+function register(email, password){
+  users[email] = password
+}
 
 function getJsonFile(path){
   var content = require(path)
@@ -13,13 +29,59 @@ function getJsonFile(path){
 }
 
 app.get('/v1/auth/status', function(req, res){
-  res.json({
-    is_authenticated:process.env.IS_AUTHENTICATED ? true : false,
-    email:process.env.USER_EMAIL || 'bob@bob.com'
-  })
+  if(req.cookies.loggedIn){
+    res.json({
+      is_authenticated:true,
+      email:req.cookies.loggedIn
+    })
+  }
+  else{
+    res.json({
+      is_authenticated:false
+    })
+  }
+  
 })
 
-app.get('/v1/user', getJsonFile('./src/test/fixtures/user.json'))
+app.post('/v1/auth/login', function(req, res){
+  console.log('-------------------------------------------');
+  console.dir(req.body)
+
+  if(login(req.body.email, req.body.password)){
+    var hour = 60 * 60 * 1000
+    res.cookie('loggedIn', req.body.email, { maxAge: hour })
+    res.json(req.body)
+  }
+  else{
+    res.statusCode = 404
+    res.json({
+      title:'Not logged in',
+      detail:'Not logged in'
+    })
+  }
+  
+})
+
+app.post('/v1/auth/register', function(req, res){
+  console.log('-------------------------------------------');
+  console.dir(req.body)
+
+  users[req.body.email] = req.body.password
+
+  res.statusCode = 201
+  res.json(req.body)
+  
+})
+
+
+app.post('/v1/auth/logout', function(req, res){
+
+  res.clearCookie('loggedIn');
+
+  res.json({})
+  
+})
+
 app.get('/v1/projects', getJsonFile('./src/test/fixtures/projects.json'))
 app.get('*', ecstatic({ root: __dirname + '/dist' }))
 
