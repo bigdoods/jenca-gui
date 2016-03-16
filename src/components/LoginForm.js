@@ -3,12 +3,23 @@ import { Grid, Cell } from 'react-mdl';
 
 import CredentialsForm from './CredentialsForm'
 
-export default function LoginForm({loginMode, handleSwitch, handleRegister, handleLogin}) {
+function reverseMode(mode){
+  return mode == 'login' ? 'register' : 'login'
+}
 
-  var form = loginMode == 'login' ? 
-    <CredentialsForm title="Login" handleSubmit={handleLogin} /> :
-    <CredentialsForm title="Register" handleSubmit={handleRegister} />
+export default function LoginForm({mode, handleSwitch, handleRegister, handleLogin}) {
 
+  console.log('-------------------------------------------');
+  console.log('mode: ' + mode)
+  var form = mode == 'register' ? 
+    <CredentialsForm title="Register" handleSubmit={handleRegister} /> :
+    <CredentialsForm title="Login" handleSubmit={handleLogin} />
+
+  var switchMode = reverseMode(mode)
+
+  function handleSwitchClick(){
+    handleSwitch(switchMode)
+  }
 
   return (
   	<div className="mdl-layout mdl-js-layout mdl-color--white-100" style={{textAlign:'center'}}>
@@ -16,9 +27,12 @@ export default function LoginForm({loginMode, handleSwitch, handleRegister, hand
 
         <Grid>
           <Cell col={12} align="middle">
-            <div style={{textAlign:'center'}}>
-              {form}
-            </div>
+            {form}
+          </Cell>
+        </Grid>
+        <Grid>
+          <Cell col={12} align="middle">
+            <a href="#" onClick={handleSwitchClick}>Click here to {switchMode}</a>
           </Cell>
         </Grid>
     

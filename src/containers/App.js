@@ -5,7 +5,7 @@ import { routeActions } from 'react-router-redux'
 import { fetchUser } from '../actions/user'
 import Layout from '../components/Layout'
 import Loading from '../components/Loading'
-import LoginForm from '../components/LoginForm'
+import LoginForm from './LoginForm'
 
 export class App extends Component {
   render() {
