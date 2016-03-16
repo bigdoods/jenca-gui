@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { switchLoginMode, updateEmail, updatePassword } from '../actions/loginform'
-import { registerUser } from '../actions/register'
-import { loginUser } from '../actions/login'
+import { registerUser, registerUserError } from '../actions/register'
+import { loginUser, loginUserError } from '../actions/login'
 
 import LoginForm from '../components/LoginForm'
 
@@ -32,10 +32,20 @@ function mapDispatchToProps(dispatch) {
       dispatch(switchLoginMode(mode))
     },
     handleRegister:function(credentials){
-      dispatch(registerUser(credentials))
+      if(!credentials.email || !credentials.password){
+        dispatch(registerUserError('please enter an email and password'))
+      }
+      else{
+        dispatch(registerUser(credentials))
+      }
     },
     handleLogin:function(credentials){
-      dispatch(loginUser(credentials))
+      if(!credentials.email || !credentials.password){
+        dispatch(registerUserError('please enter an email and password'))
+      }
+      else{
+        dispatch(loginUser(credentials))
+      }
     },
     updateEmail:function(val){
       dispatch(updateEmail(val))

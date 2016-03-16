@@ -18,3 +18,14 @@ export function registerUser(credentials = {}) {
   ])
 
 }
+
+export function registerUserError(error = '') {
+  
+  return {
+    type:REGISTER_ERROR,
+    headers:{},
+    statusCode:500,
+    error:error
+  }
+
+}
