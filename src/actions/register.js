@@ -12,9 +12,9 @@ export function registerUser(credentials = {}) {
     method: 'post',
     body: JSON.stringify(credentials)
   }, [
-    LOGIN_REQUEST,
-    LOGIN_RECEIVE,
-    LOGIN_ERROR
+    REGISTER_REQUEST,
+    REGISTER_RECEIVE,
+    REGISTER_ERROR
   ])
 
 }

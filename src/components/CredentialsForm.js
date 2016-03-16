@@ -1,26 +1,24 @@
 import React from 'react'
 import { Textfield } from 'react-mdl';
 
-export default function CredentialsForm({title, error, handleSubmit}) {
+export default function CredentialsForm({title, error, handleSubmit, updateEmail, updatePassword, email, password}) {
 
-	var props = {
-		email:null,
-		password:null
-	}
-
-	function changeHandler(field){
+	function changeHandler(handler){
 		return function(e){
 			if(e){
-				props[field] = e.target.value
+				handler(e.target.value)
 			}
 		}
 	}
 
-	var emailChangeHandler = changeHandler('email')
-	var passwordChangeHandler = changeHandler('password')
+	var emailChangeHandler = changeHandler(updateEmail)
+	var passwordChangeHandler = changeHandler(updatePassword)
 
 	function clickSubmitButton(){
-		handleSubmit && handleSubmit(props)
+		handleSubmit && handleSubmit({
+      email:email,
+      password:password
+    })
 	}
 
   var errordiv = error ? (
@@ -41,14 +39,14 @@ export default function CredentialsForm({title, error, handleSubmit}) {
             id={"email-" + title}
 				    onChange={emailChangeHandler}
 				    label="Email..."
-            value={props.email}
+            value={email}
 				    style={{width: '100%'}} />
 				  <Textfield
             id={"password-" + title}
 				    onChange={passwordChangeHandler}
 				    label="Password..."
 				    type="password"
-            value={props.password}
+            value={password}
 				    style={{width: '100%'}} />
         </form>
       </div>

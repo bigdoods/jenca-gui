@@ -6,3 +6,23 @@ export function switchLoginMode(mode) {
     mode: mode
   }
 }
+
+export const UPDATE_EMAIL = 'UPDATE_EMAIL'
+
+export function updateEmail(value) {
+  return {
+    type: UPDATE_EMAIL,
+    value: value
+  }
+}
+
+
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
+
+export function updatePassword(value) {
+  return {
+    type: UPDATE_PASSWORD,
+    value: value
+  }
+}
+

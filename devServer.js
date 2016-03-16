@@ -12,8 +12,8 @@ app.use(bodyParser.json())
 var users = {}
 
 function login(email, password){
-  var user = users[email]
-  return user && user.password==password
+  var userpassword = users[email]
+  return userpassword && userpassword==password
 }
 
 function register(email, password){
@@ -29,8 +29,6 @@ function getJsonFile(path){
 }
 
 app.get('/v1/auth/status', function(req, res){
-  setTimeout(function(){
-
 
   if(req.cookies.loggedIn){
     res.json({
@@ -44,15 +42,18 @@ app.get('/v1/auth/status', function(req, res){
     })
   }
 
-}, 10000)
   
 })
 
 app.post('/v1/auth/login', function(req, res){
   console.log('-------------------------------------------');
+  console.log('login')
   console.dir(req.body)
+  console.dir(users)
+
 
   if(login(req.body.email, req.body.password)){
+    console.log('LOGGED IN')
     var hour = 60 * 60 * 1000
     res.cookie('loggedIn', req.body.email, { maxAge: hour })
     res.json(req.body)
@@ -67,7 +68,7 @@ app.post('/v1/auth/login', function(req, res){
   
 })
 
-app.post('/v1/auth/register', function(req, res){
+app.post('/v1/auth/signup', function(req, res){
   console.log('-------------------------------------------');
   console.dir(req.body)
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { switchLoginMode } from '../actions/loginform'
+import { switchLoginMode, updateEmail, updatePassword } from '../actions/loginform'
 import { registerUser } from '../actions/register'
 import { loginUser } from '../actions/login'
 
@@ -18,6 +18,8 @@ export function Home(props) {
 function mapStateToProps(state) {
 
   return {
+    email:state.loginform.email,
+    password:state.loginform.password,
     mode:state.loginform.mode,
     loginError:state.login.error,
     registerError:state.register.error
@@ -34,6 +36,12 @@ function mapDispatchToProps(dispatch) {
     },
     handleLogin:function(credentials){
       dispatch(loginUser(credentials))
+    },
+    updateEmail:function(val){
+      dispatch(updateEmail(val))
+    },
+    updatePassword:function(val){
+      dispatch(updatePassword(val))
     }
   }
 }
