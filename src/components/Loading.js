@@ -5,7 +5,12 @@ class Loading extends Component {
     return (
       <div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         <main className="mdl-layout__content">
-          <div className="page-content">loading...</div>
+
+          <div id="loading">
+            <h2 className="mdl-card__title-text">Loading...</h2>
+            <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+          </div>
+
         </main>
       </div>
     )
