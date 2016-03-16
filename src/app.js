@@ -25,7 +25,7 @@ import * as reducers from './reducers'
 import App from "./containers/App";
 import Home from "./containers/Home";
 import Library from "./containers/Library";
-import Projects from "./components/Projects"
+import Projects from "./containers/Projects"
 
 /*
 
@@ -76,9 +76,8 @@ ReactDOM.render(
     <div>
       <Router history={history}>
         <Route path="/" component={App}>
-          <IndexRoute component={Home}/>
+          <IndexRoute component={Projects}/>
           <Route path="library" component={Library}/>
-          <Route path="projects" component={Projects}/>
         </Route>
       </Router>
     </div>

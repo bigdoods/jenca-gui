@@ -19,13 +19,10 @@ function mapStateToProps(state) {
 
   var links = loggedIn ? [{
     url:'/',
-    title:'Home'
+    title:'Projects'
   },{
     url:'/library',
     title:'Library'
-  },{
-    url:'/projects',
-    title:'Projects'
   }] : [{
     url:'/',
     title:'Login'

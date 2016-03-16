@@ -10,7 +10,7 @@ app.use(cookieParser('cookiesecret'))
 app.use(bodyParser.json())
 
 var users = {}
-var projects = {}
+var projects = require('./src/test/fixtures/projects.json')
 
 function login(email, password){
   var userpassword = users[email]

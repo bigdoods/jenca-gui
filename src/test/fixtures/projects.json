@@ -1,4 +1,79 @@
 [{
-  "id":123,
-  "name":"First project"
+  "id":"a1236210-eba5-11e5-8c72-bd88d191a9ae",
+  "name":"My First BIMserver",
+  "app":{
+      "controller": {
+          "apiVersion": "v1",
+          "kind": "ReplicationController",
+          "metadata": {
+              "labels": {
+                  "name": "bimserver"
+              },
+              "name": "bimserver-controller"
+          },
+          "spec": {
+              "replicas": 1,
+              "selector": {
+                  "app": "bimserver"
+              },
+              "template": {
+                  "metadata": {
+                      "name": "bimserver",
+                      "labels": {
+                          "app": "bimserver"
+                      }
+                  },
+                  "spec": {
+                      "containers": [
+                          {
+                              "name": "bimserver",
+                              "image": "jenca/docker-bimserver:1.4.0-FINAL-2015-11-04",
+                              "env": [
+                                  {
+                                      "name": "TOMCAT_USER",
+                                      "value": "XXX"
+                                  },
+                                  {
+                                      "name": "TOMCAT_PASSWORD",
+                                      "value": "XXX"
+                                  }
+                              ],
+                              "ports": [
+                                  {
+                                      "containerPort": 8080
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              }
+          }
+      },
+      "description": "This is the description for the bimserver",
+      "service": {
+          "apiVersion": "v1",
+          "kind": "Service",
+          "metadata": {
+              "name": "bimserver",
+              "labels": {
+                  "app": "bimserver"
+              }
+          },
+          "spec": {
+              "type": "NodePort",
+              "ports": [
+                  {
+                      "port": 8080,
+                      "targetPort": 8080,
+                      "protocol": "TCP"
+                  }
+              ],
+              "selector": {
+                  "app": "bimserver"
+              }
+          }
+      },
+      "id": "fa6248f0-eaba-11e5-aa74-5d34fea124fc",
+      "name": "bimserver"
+  }
 }]
