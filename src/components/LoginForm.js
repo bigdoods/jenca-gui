@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Cell } from 'react-mdl';
+import { Grid, Cell } from 'react-mdl'
 
 import CredentialsForm from './CredentialsForm'
 

@@ -6,6 +6,9 @@ import Menu from '../components/Menu'
 
 export class MenuContainer extends Component {
   render() {
+    console.log('-------------------------------------------');
+    console.log('-------------------------------------------');
+    console.log('MAIN MENU')
     return (
       <Menu links={this.props.links} />
     )
