@@ -15,7 +15,9 @@ export default function LibraryItem(props) {
 		    {props.description}
 		  </div>
 		  <div style={{marginBottom:'10px'}}>
-		  	<RunButton />
+		  	<RunButton 
+		  		app={props.app} 
+		  		handleRun={props.handleRun} />
 		  </div>
 		</div>
     </div>

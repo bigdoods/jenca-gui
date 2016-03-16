@@ -97,7 +97,7 @@ app.get('/v1/projects', function(req, res){
 })
 app.post('/v1/projects', function(req, res){
   var project = req.body
-  project.uuid = uuid.v1()
+  project.id = uuid.v1()
   project.runState = {}
 
   projects[project.id] = project
@@ -105,8 +105,23 @@ app.post('/v1/projects', function(req, res){
   res.json(project)
 })
 app.post('/v1/projects/:id/status', function(req, res){
-  console.log('-------------------------------------------');
-  res.json({})
+
+  var project = projects[req.params.id]
+
+  if(!project){
+    res.statusCode = 404
+    res.end('')
+    return
+  }
+
+  project.running = true
+  project.runState = {
+    k8s:true
+  }
+  res.json({
+    running:true,
+    runState:project.runState
+  })
 })
 
 app.get('*', ecstatic({ root: __dirname + '/dist' }))

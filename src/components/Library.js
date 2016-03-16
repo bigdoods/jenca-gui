@@ -11,7 +11,11 @@ export default function Library(props) {
           props.data.map(function(item){
             return (
               <div key={item.id} style={{textAlign:'center'}}>
-                <LibraryItem {...item} />
+                <LibraryItem 
+                  handleRun={props.handleRun} 
+                  name={item.name} 
+                  description={item.description} 
+                  app={item} />
               </div>
             )
           })

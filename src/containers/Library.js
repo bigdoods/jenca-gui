@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Spinner } from 'react-mdl'
 
 import { fetchLibrary } from '../actions/library'
+import { createProject } from '../actions/createproject'
 
 import LibraryComponent from '../components/Library'
 
@@ -46,6 +47,9 @@ function mapDispatchToProps(dispatch) {
   return {
     loadLibrary:function(){
       dispatch(fetchLibrary())
+    },
+    handleRun:function(app){
+      dispatch(createProject(app))
     }
   }
 }
