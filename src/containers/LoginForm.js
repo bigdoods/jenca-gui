@@ -13,9 +13,11 @@ export function Home(props) {
 
 
 function mapStateToProps(state) {
-  
+
   return {
-    mode:state.login.mode
+    mode:state.login.mode,
+    loginError:state.loginrequest.error,
+    registerError:state.registerrequest.error
   }
 }
 

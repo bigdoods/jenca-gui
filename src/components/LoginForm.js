@@ -7,11 +7,11 @@ function reverseMode(mode){
   return mode == 'login' ? 'register' : 'login'
 }
 
-export default function LoginForm({mode, handleSwitch, handleRegister, handleLogin}) {
+export default function LoginForm({mode, handleSwitch, handleRegister, handleLogin, loginError, registerError}) {
 
   var form = mode == 'register' ? 
-    <CredentialsForm title="Register" handleSubmit={handleRegister} /> :
-    <CredentialsForm title="Login" handleSubmit={handleLogin} />
+    <CredentialsForm title="Register" handleSubmit={handleRegister} error={registerError} /> :
+    <CredentialsForm title="Login" handleSubmit={handleLogin} error={loginError} />
 
   var switchMode = reverseMode(mode)
 
@@ -30,7 +30,7 @@ export default function LoginForm({mode, handleSwitch, handleRegister, handleLog
         </Grid>
         <Grid>
           <Cell col={12} align="middle">
-            <a href="#" onClick={handleSwitchClick}>Click here to {switchMode}</a>
+            <a style={{color:'#999'}} href="#" onClick={handleSwitchClick}>Click here to {switchMode}</a>
           </Cell>
         </Grid>
     
