@@ -1,14 +1,10 @@
-import { SWITCH_LOGIN_MODE } from '../actions/login'
+import { LOGIN_REQUEST, LOGIN_RECEIVE, LOGIN_ERROR } from '../actions/login'
+import apiReducer from '../api/reducer'
 
-const initialState = {
-  mode: 'login'
-}
+const reducer = apiReducer([
+  LOGIN_REQUEST,
+  LOGIN_RECEIVE,
+  LOGIN_ERROR
+])
 
-export default function update(state = initialState, action) {
-  if(action.type === SWITCH_LOGIN_MODE) {
-    return Object.assign({}, state, {
-      mode:action.mode
-    })
-  }
-  return state
-}
+export default reducer

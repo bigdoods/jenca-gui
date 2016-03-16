@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { switchLoginMode } from '../actions/login'
+import { switchLoginMode } from '../actions/loginform'
 import LoginForm from '../components/LoginForm'
 
 export function Home(props) {
@@ -15,9 +15,9 @@ export function Home(props) {
 function mapStateToProps(state) {
 
   return {
-    mode:state.login.mode,
-    loginError:state.loginrequest.error,
-    registerError:state.registerrequest.error
+    mode:state.loginform.mode,
+    loginError:state.login.error,
+    registerError:state.register.error
   }
 }
 

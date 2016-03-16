@@ -7,13 +7,13 @@ function reverseMode(mode){
   return mode == 'login' ? 'register' : 'login'
 }
 
-export default function LoginForm({mode, handleSwitch, handleRegister, handleLogin, loginError, registerError}) {
+export default function LoginForm(props) {
 
-  var form = mode == 'register' ? 
-    <CredentialsForm title="Register" handleSubmit={handleRegister} error={registerError} /> :
-    <CredentialsForm title="Login" handleSubmit={handleLogin} error={loginError} />
+  var form = props.mode == 'register' ? 
+    <CredentialsForm title="Register" handleSubmit={props.handleRegister} error={props.registerError} /> :
+    <CredentialsForm title="Login" handleSubmit={props.handleLogin} error={props.loginError} />
 
-  var switchMode = reverseMode(mode)
+  var switchMode = reverseMode(props.mode)
 
   function handleSwitchClick(){
     handleSwitch(switchMode)

@@ -1,4 +1,5 @@
-export count from './count'
 export project from './project'
 export user from './user'
+export loginform from './loginform'
 export login from './login'
+export register from './register'

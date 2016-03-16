@@ -1,8 +1,16 @@
-export const SWITCH_LOGIN_MODE = 'SWITCH_LOGIN_MODE'
+import apiAction from '../api/action'
+import { LOGIN_API } from '../api/urls'
 
-export function switchLoginMode(mode) {
-  return {
-    type: SWITCH_LOGIN_MODE,
-    mode: mode
-  }
+export const LOGIN_REQUEST = 'LOGIN_REQUEST'
+export const LOGIN_RECEIVE = 'LOGIN_RECEIVE'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
+
+export function loginUser() {
+
+  return apiAction(LOGIN_API, [
+    LOGIN_REQUEST,
+    LOGIN_RECEIVE,
+    LOGIN_ERROR
+  ])
+
 }
