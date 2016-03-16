@@ -71,8 +71,6 @@ const store = finalCreateStore(reducer)
   routes
 */
 
-setTimeout(function(){  
-
 ReactDOM.render(
   <Provider store={store}>
     <div>
@@ -88,4 +86,3 @@ ReactDOM.render(
   document.getElementById('mount')
 )
 
-},2000)
