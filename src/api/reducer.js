@@ -4,11 +4,17 @@ const initialState = {
   loading: false,
   loaded: false,
   error: null,
-  data: null
+  data: null,
+  statusCode:null,
+  headers:{}
 }
 
-export default function apiReducer(actions = [], maps = {}){
+export default function apiReducer(actions = [], maps = {}, filter){
   return function update(state = initialState, action) {
+    if(filter){
+      var ret = filter(state, action)
+      if(ret) return ret
+    }
     switch (action.type) {
       case actions[0]:
         var ret = Object.assign({}, state, {

@@ -3,6 +3,12 @@ import { Link } from 'react-router'
 import { Drawer, Navigation } from 'react-mdl'
 
 class Menubar extends Component {
+
+  handleLogout(e) {
+    e && e.preventDefault()
+    this.props.handleLogout()
+  }
+
   render() {
     //const { value, onIncrement, onDecrement } = this.props
     return (
@@ -15,6 +21,7 @@ class Menubar extends Component {
                 )
               })
             }
+            <a className="mdl-navigation__link" href="#" onClick={this.handleLogout.bind(this)}>Logout</a>
           </Navigation>
       </Drawer>
     )
