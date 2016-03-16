@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import request from 'superagent'
 
 /*
 
@@ -14,6 +14,23 @@ import fetch from 'isomorphic-fetch'
   the third is for an error
 
 */
+
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response
+  } else {
+    var error = new Error(response.statusText)
+    error.response = response
+    throw error
+  }
+}
+
+function parseJSON(response, opts) {
+  console.log('-------------------------------------------');
+  console.log(response.body.toString())
+  return opts.json ? response.json() : response.text()
+}
+
 export default function ajax(opts, actions){
 
   var requestAction, receiveAction, errorAction
@@ -30,21 +47,27 @@ export default function ajax(opts, actions){
 
     dispatch(requestAction())
 
-    return fetch(opts.url, opts)
-      .then(function(response){
+    var req = request[opts.method](opts.url)
 
-        if (!response.ok) {
-          return dispatch(errorAction(response.text(), response))
-        }
+    req = req
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
 
-        return (opts.json ? response.json() : response.text())
-          .then(body => ({ body, response }))
-        
-      }).then(({ body, response }) => {
+    if(opts.body){
+      req = req.send(opts.body)
+    }
 
-        return dispatch(receiveAction(body, response))
+    req.end(function(err, res){
 
-      })
+      if(err){
+        dispatch(errorAction(err.toString(), res))
+      }
+      else{
+        dispatch(receiveAction(res.body, res)) 
+      }
+      
+    })
+
   }
 }
 
@@ -58,5 +81,6 @@ export function processOpts(opts){
   if(typeof(opts)==='string') opts = {
     url:opts
   }
+  opts.method = opts.method || 'get'
   return opts
 }

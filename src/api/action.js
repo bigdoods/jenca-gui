@@ -1,6 +1,6 @@
 import { json } from './ajax'
 
-export default function apiAction(url, actions){
+export default function apiAction(opts, actions){
 
   var [requestAction, receiveAction, errorAction] = actions
 
@@ -22,12 +22,12 @@ export default function apiAction(url, actions){
     return {
       type: errorAction,
       error: error,
-      status: response.status,
+      statusCode: response.statusCode,
       headers: response.headers
     }
   }
 
-  return json(url, [
+  return json(opts, [
     dataRequest,
     dataReceive,
     dataError

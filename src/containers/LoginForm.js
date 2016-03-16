@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { switchLoginMode } from '../actions/loginform'
+import { registerUser } from '../actions/register'
+import { loginUser } from '../actions/login'
+
 import LoginForm from '../components/LoginForm'
 
 export function Home(props) {
@@ -26,15 +29,11 @@ function mapDispatchToProps(dispatch) {
     handleSwitch:function(mode){
       dispatch(switchLoginMode(mode))
     },
-    handleRegister:function(details){
-      console.log('-------------------------------------------');
-      console.log('register')
-      console.dir(details)
+    handleRegister:function(credentials){
+      dispatch(registerUser(credentials))
     },
-    handleLogin:function(details){
-      console.log('-------------------------------------------');
-      console.log('login')
-      console.dir(details)
+    handleLogin:function(credentials){
+      dispatch(loginUser(credentials))
     }
   }
 }

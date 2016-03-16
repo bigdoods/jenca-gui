@@ -1,4 +1,4 @@
-import { SWITCH_LOGIN_MODE } from '../actions/login'
+import { SWITCH_LOGIN_MODE } from '../actions/loginform'
 
 const initialState = {
   mode: 'login'

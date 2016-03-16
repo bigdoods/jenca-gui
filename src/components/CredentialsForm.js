@@ -36,7 +36,7 @@ export default function CredentialsForm({title, error, handleSubmit}) {
         <h2 className="mdl-card__title-text">{title}</h2>
       </div>
         <div className="mdl-card__supporting-text">
-        <form action="#">
+        <form action="#" id={title}>
           <Textfield
             id={"email-" + title}
 				    onChange={emailChangeHandler}

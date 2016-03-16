@@ -5,9 +5,13 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_RECEIVE = 'LOGIN_RECEIVE'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 
-export function loginUser() {
+export function loginUser(credentials = {}) {
 
-  return apiAction(LOGIN_API, [
+  return apiAction({
+    url:LOGIN_API,
+    method: 'post',
+    body: JSON.stringify(credentials)
+  }, [
     LOGIN_REQUEST,
     LOGIN_RECEIVE,
     LOGIN_ERROR

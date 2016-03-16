@@ -16,7 +16,7 @@ export default function LoginForm(props) {
   var switchMode = reverseMode(props.mode)
 
   function handleSwitchClick(){
-    handleSwitch(switchMode)
+    props.handleSwitch(switchMode)
   }
 
   return (
