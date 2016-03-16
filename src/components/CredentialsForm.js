@@ -42,7 +42,7 @@ export default function CredentialsForm({title, handleSubmit}) {
 					    style={{width: '100%'}} />
         </form>
       </div>
-      <div className="mdl-card__actions mdl-card--border">
+      <div className="mdl-card__actions mdl-card--border" style={{textAlign:'left'}}>
         <button onClick={clickSubmitButton} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{title}</button>
       </div>
     </div>
