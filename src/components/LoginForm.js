@@ -9,8 +9,6 @@ function reverseMode(mode){
 
 export default function LoginForm({mode, handleSwitch, handleRegister, handleLogin}) {
 
-  console.log('-------------------------------------------');
-  console.log('mode: ' + mode)
   var form = mode == 'register' ? 
     <CredentialsForm title="Register" handleSubmit={handleRegister} /> :
     <CredentialsForm title="Login" handleSubmit={handleLogin} />
