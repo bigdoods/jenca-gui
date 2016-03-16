@@ -22,7 +22,7 @@ export function loginUser(credentials = {}) {
 export function loginUserError(error = '') {
   
   return {
-    type:REGISTER_ERROR,
+    type:LOGIN_ERROR,
     headers:{},
     statusCode:500,
     error:error

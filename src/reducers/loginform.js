@@ -1,4 +1,5 @@
 import { SWITCH_LOGIN_MODE, UPDATE_EMAIL, UPDATE_PASSWORD } from '../actions/loginform'
+import { REGISTER_RECEIVE } from '../actions/register'
 
 const initialState = {
   mode: 'login',
@@ -19,6 +20,10 @@ export default function update(state = initialState, action) {
     case UPDATE_PASSWORD:
       return Object.assign({}, state, {
         password:action.value
+      })
+    case REGISTER_RECEIVE:
+      return Object.assign({}, state, {
+        mode:'login'
       })
     default:
       return state

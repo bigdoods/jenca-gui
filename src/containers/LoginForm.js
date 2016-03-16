@@ -41,7 +41,7 @@ function mapDispatchToProps(dispatch) {
     },
     handleLogin:function(credentials){
       if(!credentials.email || !credentials.password){
-        dispatch(registerUserError('please enter an email and password'))
+        dispatch(loginUserError('please enter an email and password'))
       }
       else{
         dispatch(loginUser(credentials))

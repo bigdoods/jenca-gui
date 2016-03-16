@@ -1,4 +1,6 @@
 import { LOGIN_REQUEST, LOGIN_RECEIVE, LOGIN_ERROR } from '../actions/login'
+import { REGISTER_RECEIVE } from '../actions/register'
+
 import apiReducer from '../api/reducer'
 
 const reducer = apiReducer([
@@ -11,6 +13,15 @@ const reducer = apiReducer([
       state.error = state.data.title
     }
     return state
+  }
+}, function(state, action){
+  switch (action.type) {
+    case REGISTER_RECEIVE:
+      return Object.assign({}, state, {
+        error: 'You are registered - click login'
+      })
+    default:
+      return null
   }
 })
 
