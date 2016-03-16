@@ -29,6 +29,9 @@ function getJsonFile(path){
 }
 
 app.get('/v1/auth/status', function(req, res){
+  setTimeout(function(){
+
+
   if(req.cookies.loggedIn){
     res.json({
       is_authenticated:true,
@@ -40,6 +43,8 @@ app.get('/v1/auth/status', function(req, res){
       is_authenticated:false
     })
   }
+
+}, 10000)
   
 })
 
