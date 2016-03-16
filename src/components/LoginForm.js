@@ -6,7 +6,7 @@ export default function LoginForm({handleRegister, handleLogin}) {
 			<main className="mdl-layout__content">
 
 				<div className="mdl-grid">
-  					<div class="mdl-cell mdl-cell--4-col">
+  					<div className="mdl-cell mdl-cell--4-col">
 				  
 				  		<div className="mdl-card mdl-shadow--6dp">
 							<div className="mdl-card__title mdl-color--primary mdl-color-text--white">

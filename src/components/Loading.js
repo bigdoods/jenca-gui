@@ -8,7 +8,7 @@ class Loading extends Component {
 
           <div id="loading">
             <h2 className="mdl-card__title-text">Loading...</h2>
-            <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+            <div id="p2" className="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
           </div>
 
         </main>

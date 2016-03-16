@@ -10,9 +10,7 @@ var nodeEnvPlugin = new webpack.DefinePlugin({
 })
 
 module.exports = {
-  devtool: RELEASE ? [] : [
-    'inline-source-map'
-  ],
+  devtool: RELEASE ? [] : 'inline-source-map',
   entry: [
     './src/app'
   ],
