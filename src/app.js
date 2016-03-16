@@ -24,7 +24,7 @@ import * as reducers from './reducers'
 //import Login from "./containers/Login";
 import App from "./containers/App";
 import Home from "./containers/Home";
-import Library from "./components/Library";
+import Library from "./containers/Library";
 import Projects from "./components/Projects"
 
 /*

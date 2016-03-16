@@ -2,16 +2,20 @@ import React from 'react'
 
 import LibraryItem from "./LibraryItem"
 
-export default function Library() {
+export default function Library(props) {
+
   return (
   	<div>
   		<div className="demo-grid-ruler mdl-grid">
-        <LibraryItem />
-        <LibraryItem />
-        <LibraryItem />
-        <LibraryItem />
-        <LibraryItem />
-        <LibraryItem />
+        {
+          props.data.map(function(item){
+            return (
+              <div key={item.id} style={{textAlign:'center'}}>
+                <LibraryItem {...item} />
+              </div>
+            )
+          })
+        }
       </div>
 	</div>
   )

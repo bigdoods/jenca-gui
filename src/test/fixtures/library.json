@@ -1,0 +1,696 @@
+{
+    "bimserver": {
+        "controller": {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "labels": {
+                    "name": "bimserver"
+                },
+                "name": "bimserver-controller"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "bimserver"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "bimserver",
+                        "labels": {
+                            "app": "bimserver"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "bimserver",
+                                "image": "jenca/docker-bimserver:1.4.0-FINAL-2015-11-04",
+                                "env": [
+                                    {
+                                        "name": "TOMCAT_USER",
+                                        "value": "XXX"
+                                    },
+                                    {
+                                        "name": "TOMCAT_PASSWORD",
+                                        "value": "XXX"
+                                    }
+                                ],
+                                "ports": [
+                                    {
+                                        "containerPort": 8080
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "description": "This is the description for the bimserver",
+        "service": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "bimserver",
+                "labels": {
+                    "app": "bimserver"
+                }
+            },
+            "spec": {
+                "type": "NodePort",
+                "ports": [
+                    {
+                        "port": 8080,
+                        "targetPort": 8080,
+                        "protocol": "TCP"
+                    }
+                ],
+                "selector": {
+                    "app": "bimserver"
+                }
+            }
+        },
+        "id": "fa6248f0-eaba-11e5-aa74-5d34fea124fc",
+        "name": "bimserver"
+    },
+    "duraark-system": {
+        "controller": {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "labels": {
+                    "name": "duraark"
+                },
+                "name": "duraark-controller"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "duraark"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "duraark",
+                        "labels": {
+                            "app": "duraark"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "duraark",
+                                "image": "duraark",
+                                "ports": [
+                                    {
+                                        "containerPort": 80
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "docker-compose": {
+            "duraark-sessions": {
+                "build": "./duraark-sessions",
+                "volumes": [
+                    "/home/martin/01_work/duraark/duraark-storage:/duraark-storage"
+                ]
+            },
+            "duraark-metadata": {
+                "build": "./duraark-metadata",
+                "volumes_from": [
+                    "duraark-sessions"
+                ],
+                "volumes": [
+                    "/var/run/docker.sock:/var/run/docker.sock"
+                ],
+                "environment": [
+                    "DURAARK_STORAGE_PATH=/home/martin/01_work/duraark/duraark-storage"
+                ]
+            },
+            "duraark-sda": {
+                "build": "./duraark-sda",
+                "volumes": [
+                    "/var/run/docker.sock:/var/run/docker.sock"
+                ],
+                "links": [
+                    "duraark-sdas"
+                ],
+                "environment": [
+                    "DURAARK_STORAGE_PATH=/home/martin/01_work/duraark/duraark-storage"
+                ]
+            },
+            "duraark-geometricenrichment": {
+                "build": "./duraark-geometricenrichment",
+                "volumes_from": [
+                    "duraark-sessions"
+                ],
+                "volumes": [
+                    "/var/run/docker.sock:/var/run/docker.sock"
+                ],
+                "environment": [
+                    "DURAARK_STORAGE_PATH=/home/martin/01_work/duraark/duraark-storage"
+                ]
+            },
+            "duraark-digitalpreservation": {
+                "build": "./duraark-digitalpreservation",
+                "volumes_from": [
+                    "duraark-sessions"
+                ],
+                "links": [
+                    "duraark-metadata"
+                ],
+                "volumes": [
+                    "/tmp:/tmp"
+                ]
+            },
+            "duraark-sdas": {
+                "image": "eccenca/virtuoso7",
+                "ports": [
+                    "8890:8890",
+                    "1111:1111"
+                ],
+                "volumes": [
+                    "../virtuoso/db:/var/lib/virtuoso/db"
+                ]
+            },
+            "duraark-pointcloud-viewer": {
+                "build": "duraark-pointcloud-viewer",
+                "ports": [
+                    "5016:5016"
+                ],
+                "volumes_from": [
+                    "duraark-sessions"
+                ],
+                "volumes": [
+                    "/var/run/docker.sock:/var/run/docker.sock"
+                ]
+            },
+            "workbench-ui": {
+                "build": "./workbench-ui",
+                "environment": [
+                    "DURAARK_API_ENDPOINT=http://localhost"
+                ]
+            },
+            "web": {
+                "build": "./api-gatekeeper",
+                "ports": [
+                    "80:80"
+                ],
+                "links": [
+                    "duraark-sessions",
+                    "duraark-metadata",
+                    "duraark-sda",
+                    "duraark-geometricenrichment",
+                    "duraark-digitalpreservation",
+                    "duraark-pointcloud-viewer",
+                    "workbench-ui"
+                ]
+            }
+        },
+        "service": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "duraark",
+                "labels": {
+                    "app": "duraark"
+                }
+            },
+            "spec": {
+                "type": "NodePort",
+                "ports": [
+                    {
+                        "port": 80,
+                        "targetPort": 80,
+                        "protocol": "TCP"
+                    }
+                ],
+                "selector": {
+                    "app": "duraark"
+                }
+            }
+        },
+        "id": "fa633350-eaba-11e5-aa74-5d34fea124fc",
+        "name": "duraark-system",
+        "description": ""
+    },
+    "flarum": {
+        "controller": {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "labels": {
+                    "name": "flarum"
+                },
+                "name": "flarum-controller"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "flarum"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "flarum",
+                        "labels": {
+                            "app": "flarum"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "flarum",
+                                "image": "sebp/flarum",
+                                "ports": [
+                                    {
+                                        "containerPort": 80
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "service": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "flarum",
+                "labels": {
+                    "app": "flarum"
+                }
+            },
+            "spec": {
+                "type": "NodePort",
+                "ports": [
+                    {
+                        "port": 80,
+                        "targetPort": 80,
+                        "protocol": "TCP"
+                    }
+                ],
+                "selector": {
+                    "app": "flarum"
+                }
+            }
+        },
+        "id": "fa63a880-eaba-11e5-aa74-5d34fea124fc",
+        "name": "flarum",
+        "description": ""
+    },
+    "ghost": {
+        "controller": {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "labels": {
+                    "name": "ghost"
+                },
+                "name": "ghost-controller"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "ghost"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "ghost",
+                        "labels": {
+                            "app": "ghost"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "ghost",
+                                "image": "ghost",
+                                "ports": [
+                                    {
+                                        "containerPort": 2368
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "service": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "ghost",
+                "labels": {
+                    "app": "ghost"
+                }
+            },
+            "spec": {
+                "type": "NodePort",
+                "ports": [
+                    {
+                        "port": 2368,
+                        "targetPort": 2368,
+                        "protocol": "TCP"
+                    }
+                ],
+                "selector": {
+                    "app": "ghost"
+                }
+            }
+        },
+        "id": "fa63a881-eaba-11e5-aa74-5d34fea124fc",
+        "name": "ghost",
+        "description": ""
+    },
+    "limesurvey": {
+        "controller": {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "labels": {
+                    "name": "limesurvey"
+                },
+                "name": "limesurvey-controller"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "limesurvey"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "limesurvey",
+                        "labels": {
+                            "app": "limesurvey"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "limesurvey",
+                                "image": "crramirez/limesurvey",
+                                "ports": [
+                                    {
+                                        "containerPort": 80
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "service": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "limesurvey",
+                "labels": {
+                    "app": "limesurvey"
+                }
+            },
+            "spec": {
+                "type": "NodePort",
+                "ports": [
+                    {
+                        "port": 80,
+                        "targetPort": 80,
+                        "protocol": "TCP"
+                    }
+                ],
+                "selector": {
+                    "app": "limesurvey"
+                }
+            }
+        },
+        "id": "fa63a882-eaba-11e5-aa74-5d34fea124fc",
+        "name": "limesurvey",
+        "description": ""
+    },
+    "owncloud": {
+        "controller": {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "labels": {
+                    "name": "owncloud"
+                },
+                "name": "owncloud-controller"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "owncloud"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "owncloud",
+                        "labels": {
+                            "app": "owncloud"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "owncloud",
+                                "image": "owncloud",
+                                "ports": [
+                                    {
+                                        "containerPort": 80
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "service": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "owncloud",
+                "labels": {
+                    "app": "owncloud"
+                }
+            },
+            "spec": {
+                "type": "NodePort",
+                "ports": [
+                    {
+                        "port": 80,
+                        "targetPort": 80,
+                        "protocol": "TCP"
+                    }
+                ],
+                "selector": {
+                    "app": "owncloud"
+                }
+            }
+        },
+        "id": "fa63a883-eaba-11e5-aa74-5d34fea124fc",
+        "name": "owncloud",
+        "description": ""
+    },
+    "redmine": {
+        "controller": {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "labels": {
+                    "name": "redmine"
+                },
+                "name": "redmine-controller"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "redmine"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "redmine",
+                        "labels": {
+                            "app": "redmine"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "redmine",
+                                "image": "redmine",
+                                "ports": [
+                                    {
+                                        "containerPort": 3000
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "service": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "redmine",
+                "labels": {
+                    "app": "redmine"
+                }
+            },
+            "spec": {
+                "type": "NodePort",
+                "ports": [
+                    {
+                        "port": 3000,
+                        "targetPort": 3000,
+                        "protocol": "TCP"
+                    }
+                ],
+                "selector": {
+                    "app": "redmine"
+                }
+            }
+        },
+        "id": "fa63cf90-eaba-11e5-aa74-5d34fea124fc",
+        "name": "redmine",
+        "description": ""
+    },
+    "rocketchat": {
+        "controller": {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "labels": {
+                    "name": "rocketchat"
+                },
+                "name": "rocketchat-controller"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "rocketchat"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "rocketchat",
+                        "labels": {
+                            "app": "rocketchat"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "rocketchat",
+                                "image": "rocketchat",
+                                "ports": [
+                                    {
+                                        "containerPort": 80
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "service": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "rocketchat",
+                "labels": {
+                    "app": "rocketchat"
+                }
+            },
+            "spec": {
+                "type": "NodePort",
+                "ports": [
+                    {
+                        "port": 80,
+                        "targetPort": 80,
+                        "protocol": "TCP"
+                    }
+                ],
+                "selector": {
+                    "app": "rocketchat"
+                }
+            }
+        },
+        "id": "fa63cf91-eaba-11e5-aa74-5d34fea124fc",
+        "name": "rocketchat",
+        "description": ""
+    },
+    "wordpress": {
+        "controller": {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "labels": {
+                    "name": "wordpress"
+                },
+                "name": "wordpress-controller"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "wordpress"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "wordpress",
+                        "labels": {
+                            "app": "wordpress"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "wordpress",
+                                "image": "wordpress",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "service": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "wordpress",
+                "labels": {
+                    "app": "wordpress"
+                }
+            },
+            "spec": {
+                "type": "NodePort",
+                "ports": [
+                    {
+                        "port": 8080,
+                        "targetPort": 8080,
+                        "protocol": "TCP"
+                    }
+                ],
+                "selector": {
+                    "app": "wordpress"
+                }
+            }
+        },
+        "id": "fa63cf92-eaba-11e5-aa74-5d34fea124fc",
+        "name": "wordpress",
+        "description": ""
+    }
+}

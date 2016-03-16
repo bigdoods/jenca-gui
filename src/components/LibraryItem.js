@@ -1,25 +1,22 @@
 import React from 'react'
+import { Grid, Cell } from 'react-mdl'
 
 import RunButton from "./RunButton";
 
-export default function LibraryItem() {
+export default function LibraryItem(props) {
   return (
-	<div>
+	<div style={{margin:'10px'}}>
 		<div className="demo-card-square mdl-card mdl-shadow--2dp">
-		  <img src="thumbnails/bimserver.png" />
+		  <img src={'thumbnails/' + props.name + '.png'} />
 		  <div className="mdl-card__title mdl-card--expand">
-		    <h2 className="mdl-card__title-text">App Name</h2>
+		    <h2 className="mdl-card__title-text">{props.name}</h2>
 		  </div>
 		  <div className="mdl-card__supporting-text">
-		    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		    Aenan convallis.
+		    {props.description}
 		  </div>
-		  <div className="mdl-card__actions mdl-card--border">
-		    <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-		      View Full Description
-		    </a>
+		  <div style={{marginBottom:'10px'}}>
+		  	<RunButton />
 		  </div>
-		  <RunButton />
 		</div>
     </div>
   )

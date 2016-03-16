@@ -88,6 +88,7 @@ app.post('/v1/auth/logout', function(req, res){
   
 })
 
+app.get('/v1/library', getJsonFile('./src/test/fixtures/library.json'))
 app.get('/v1/projects', getJsonFile('./src/test/fixtures/projects.json'))
 app.get('*', ecstatic({ root: __dirname + '/dist' }))
 

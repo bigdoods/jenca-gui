@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Grid, Cell, Spinner } from 'react-mdl';
+import { Grid, Cell, Spinner } from 'react-mdl'
 
 class Loading extends Component {
   render() {
