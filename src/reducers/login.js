@@ -1,6 +1,5 @@
 import { LOGIN_REQUEST, LOGIN_RECEIVE, LOGIN_ERROR } from '../actions/login'
 import { REGISTER_RECEIVE } from '../actions/register'
-
 import apiReducer from '../api/reducer'
 
 const reducer = apiReducer([

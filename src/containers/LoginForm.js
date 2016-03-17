@@ -1,10 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import { switchLoginMode, updateEmail, updatePassword } from '../actions/loginform'
 import { registerUser, registerUserError } from '../actions/register'
 import { loginUser, loginUserError } from '../actions/login'
-
 import LoginForm from '../components/LoginForm'
 
 export function Home(props) {
@@ -13,7 +11,6 @@ export function Home(props) {
     <LoginForm {...props} />
   )
 }
-
 
 function mapStateToProps(state) {
 

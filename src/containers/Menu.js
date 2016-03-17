@@ -11,7 +11,6 @@ export class MenuContainer extends Component {
       <Menu links={this.props.links} handleLogout={this.props.handleLogout} />
     )
   }
-  
 }
 
 function mapStateToProps(state) {

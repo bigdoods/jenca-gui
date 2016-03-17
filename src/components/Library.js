@@ -1,9 +1,7 @@
 import React from 'react'
-
 import LibraryItem from "./LibraryItem"
 
 export default function Library(props) {
-
   return (
   	<div>
   		<div className="demo-grid-ruler mdl-grid">

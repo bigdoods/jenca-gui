@@ -55,8 +55,6 @@ export default function CredentialsForm({title, error, handleSubmit, updateEmail
         <button onClick={clickSubmitButton} className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{title}</button>
       </div>
     </div>
-
-  	
+    
   )
 }
-

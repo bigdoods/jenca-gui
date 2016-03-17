@@ -1,10 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { routeActions } from 'react-router-redux'
-
 import { fetchUser } from '../actions/user'
-
-
 import Layout from '../components/Layout'
 import Loading from '../components/Loading'
 import LoginForm from './LoginForm'
@@ -30,7 +27,6 @@ export class App extends Component {
       return <LoginForm />
     }
   }
-  
 }
 
 function mapStateToProps(state) {

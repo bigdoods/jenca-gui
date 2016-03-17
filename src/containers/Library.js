@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Spinner } from 'react-mdl'
-
 import { fetchLibrary } from '../actions/library'
 import { createProject } from '../actions/createproject'
-
 import LibraryComponent from '../components/Library'
 
 
@@ -31,7 +29,6 @@ class Library extends Component {
     this.props.loadLibrary()
   }
 }
-
 
 function mapStateToProps(state) {
 
