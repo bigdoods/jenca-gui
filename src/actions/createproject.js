@@ -41,7 +41,7 @@ export function createProject(app) {
         var project = res.body
 
         var req2 = request
-          .post(PROJECTS_API + '/' + project.id + '/status')
+          .put(PROJECTS_API + '/' + project.id + '/status')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
           .send({

@@ -1,6 +1,9 @@
 import React from 'react'
 
 export default function ProjectItem(props) {
+
+	var nodePort = props.runState.data.service.spec.ports[0].nodePort
+
   return (
   	<div>
 		<div className="demo-card-wide mdl-card mdl-shadow--2dp">
@@ -11,7 +14,7 @@ export default function ProjectItem(props) {
 		    {props.app.description}
 		  </div>
 		  <div className="mdl-card__actions mdl-card--border">
-		    <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+		    <a href={"http://dev.jenca.org:" + nodePort} target="_blank" className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
 		      Open Application
 		    </a>
 		  </div>
