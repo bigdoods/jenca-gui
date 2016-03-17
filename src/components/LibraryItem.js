@@ -4,7 +4,7 @@ import RunButton from "./RunButton";
 
 export default function LibraryItem(props) {
   return (
-	<div style={{margin:'20px'}}>
+	<div id="library-item">
 		<div className="demo-card-square mdl-card mdl-shadow--2dp">
 		  <img src={'thumbnails/' + props.name + '.png'} />
 		  <div className="mdl-card__title mdl-card--expand">
@@ -13,7 +13,7 @@ export default function LibraryItem(props) {
 		  <div className="mdl-card__supporting-text">
 		    {props.description}
 		  </div>
-		  <div style={{marginBottom:'20px'}}>
+		  <div id="run-button">
 		  	<RunButton 
 		  		app={props.app} 
 		  		handleRun={props.handleRun} />

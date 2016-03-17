@@ -12,7 +12,10 @@ class Menubar extends Component {
   render() {
     //const { value, onIncrement, onDecrement } = this.props
     return (
-      <Drawer title="Jenca">
+      <Drawer>
+        <div id="jenca-logo">
+          <img src={"/elements/jenca-blk.png"} alt="jenca" width="50%" />
+        </div>
           <Navigation>
             {
               this.props.links.map(function(link){

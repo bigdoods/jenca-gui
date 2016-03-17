@@ -1,3 +1,20 @@
-.demo-grid-ruler .mdl-grid {
-	align-items: center;
+#jenca-logo {
+	text-align: center;
+	padding: 10px;
+}
+
+#library-div {
+	text-align: center;
+}
+
+#library-item {
+	margin: 20px;
+}
+
+#run-button {
+	margin: 20px;
+}
+
+#project-item {
+	margin: 20px;
 }

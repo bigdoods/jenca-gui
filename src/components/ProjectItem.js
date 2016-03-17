@@ -5,7 +5,7 @@ export default function ProjectItem(props) {
 	var nodePort = props.runState.data.service.spec.ports[0].nodePort
 
   return (
-  	<div style={{margin:'20px'}}>
+  	<div id="project-item">
 		<div className="demo-card-wide mdl-card mdl-shadow--2dp">
 		  <div className="mdl-card__title">
 		    <h2 className="mdl-card__title-text">{props.name}</h2>

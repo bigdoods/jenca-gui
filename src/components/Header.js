@@ -5,7 +5,7 @@ class HeaderComponent extends Component {
 
   render() {
     return (
-      <Header title="The simple way to run BIM apps in the cloud!" />
+      	<Header title="The simple way to run BIM apps in the cloud!" />
     )
   }
 }
