@@ -31,4 +31,4 @@ build.dist:
 	  -v $(ROOT_DIR)/dist:/app/dist \
 		$(HUBACCOUNT)/$(SERVICE):$(VERSION)-dev release
 
-build: build.dist prodimage
+build: devimage build.dist prodimage
