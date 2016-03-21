@@ -10,35 +10,27 @@ import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 
 /*
-
   reducers
-  
 */
 import * as reducers from './reducers'
 
 /*
-
   containers
-  
 */
+//import Login from "./containers/Login";
 import App from "./containers/App";
-import Home from "./containers/Home";
-import Foo from "./components/Foo";
-import Bar from "./components/Bar";
+import Library from "./containers/Library";
+import Projects from "./containers/Projects"
 
 /*
-
   history/logging
-  
 */
 const history = createHistory()
 const routerMiddleware = syncHistory(history)
 const loggerMiddleware = createLogger()
 
 /*
-
   reducer
-  
 */
 const reducer = combineReducers({
   ...reducers,
@@ -55,9 +47,7 @@ if(process.env.NODE_ENV==='development'){
 }
 
 /*
-
   store
-  
 */
 const finalCreateStore = compose(
   applyMiddleware.apply(null, middlewareArray)
@@ -66,18 +56,15 @@ const finalCreateStore = compose(
 const store = finalCreateStore(reducer)
 
 /*
-
   routes
-  
 */
 ReactDOM.render(
   <Provider store={store}>
     <div>
       <Router history={history}>
         <Route path="/" component={App}>
-          <IndexRoute component={Home}/>
-          <Route path="foo" component={Foo}/>
-          <Route path="bar" component={Bar}/>
+          <IndexRoute component={Projects}/>
+          <Route path="library" component={Library}/>
         </Route>
       </Router>
     </div>

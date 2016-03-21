@@ -1,25 +1,28 @@
 import React, { Component, PropTypes } from 'react'
 import Header from './Header'
 import Menu from '../containers/Menu'
+import { Layout, Content } from 'react-mdl'
 
-class Layout extends Component {
+class LayoutComponent extends Component {
   render() {
     return (
-      <div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        <Header loggedIn={this.props.loggedIn} />
+
+      <Layout fixedHeader fixedDrawer>
+        <Header />
         <Menu />
-        <main className="mdl-layout__content">
-          <div className="page-content">{this.props.children}</div>
-        </main>
-      </div>
+        <Content>
+          {this.props.children}
+        </Content>
+      </Layout>
+
     )
   }
 }
 
-Layout.propTypes = {
+LayoutComponent.propTypes = {
   //value: PropTypes.number.isRequired,
   //onIncrement: PropTypes.func.isRequired,
   //onDecrement: PropTypes.func.isRequired
 }
 
-export default Layout
+export default LayoutComponent

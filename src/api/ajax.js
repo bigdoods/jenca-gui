@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import request from 'superagent'
 
 /*
 
@@ -14,6 +14,7 @@ import fetch from 'isomorphic-fetch'
   the third is for an error
 
 */
+
 export default function ajax(opts, actions){
 
   var requestAction, receiveAction, errorAction
@@ -28,23 +29,31 @@ export default function ajax(opts, actions){
 
   return function(dispatch){
 
-    dispatch(requestAction())
+    setTimeout(function(){
+      dispatch(requestAction())
 
-    return fetch(opts.url, opts)
-      .then(function(response){
+      var req = request[opts.method](opts.url)
 
-        if (!response.ok) {
-          return dispatch(errorAction(response.text(), response))
+      req = req
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+
+      if(opts.body){
+        req = req.send(opts.body)
+      }
+
+      req.end(function(err, res){
+
+        if(err){
+          dispatch(errorAction(err.toString(), res))
         }
-
-        return (opts.json ? response.json() : response.text())
-          .then(body => ({ body, response }))
+        else{
+          dispatch(receiveAction(res.body, res)) 
+        }
         
-      }).then(({ body, response }) => {
-
-        return dispatch(receiveAction(body, response))
-
       })
+    },1)
+
   }
 }
 
@@ -58,5 +67,6 @@ export function processOpts(opts){
   if(typeof(opts)==='string') opts = {
     url:opts
   }
+  opts.method = opts.method || 'get'
   return opts
 }

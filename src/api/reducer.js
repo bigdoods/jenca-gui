@@ -4,30 +4,58 @@ const initialState = {
   loading: false,
   loaded: false,
   error: null,
-  data: null
+  data: null,
+  statusCode:null,
+  headers:{}
 }
 
-export default function apiReducer(actions = []){
+export default function apiReducer(actions = [], maps = {}, filter){
   return function update(state = initialState, action) {
+    if(filter){
+      var ret = filter(state, action)
+      if(ret) return ret
+    }
     switch (action.type) {
       case actions[0]:
-        return Object.assign({}, state, {
+        var ret = Object.assign({}, state, {
           loading: true
         })
+        if(maps.request){
+          return maps.request(ret, action)
+        }
+        else{
+          return ret
+        }
       case actions[1]:
-        return Object.assign({}, state, {
+        var ret = Object.assign({}, state, {
           loading: false,
           loaded: true,
           error: null,
-          data: action.data
+          data: action.data,
+          statusCode: action.statusCode,
+          headers: action.headers
         })
+        if(maps.receive){
+          return maps.receive(ret, action)
+        }
+        else{
+          return ret
+        }
       case actions[2]:
-        return Object.assign({}, state, {
+        var ret = Object.assign({}, state, {
           loading: false,
           loaded: true,
           error: action.error,
-          data: null
+          data: action.data,
+          statusCode: action.statusCode,
+          headers: action.headers
         })
+        if(maps.error){
+          return maps.error(ret, action)
+        }
+        else{
+          return ret
+        }
       default:
         return state
     }

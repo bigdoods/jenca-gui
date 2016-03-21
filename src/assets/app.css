@@ -1,0 +1,34 @@
+#jenca-logo-login {
+	text-align: center;
+	padding-top: 10%;
+	padding-bottom: 5%;
+}
+
+#tagline {
+	text-align: center;
+}
+
+#jenca-logo-header {
+	text-align: center;
+	padding: 10px;
+}
+
+#header-tagline {
+	align: right;
+}
+
+#library-div {
+	text-align: center;
+}
+
+#library-item {
+	margin: 20px;
+}
+
+#run-button {
+	margin: 20px;
+}
+
+#project-item {
+	margin: 20px;
+}
