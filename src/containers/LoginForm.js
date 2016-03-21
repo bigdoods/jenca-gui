@@ -12,7 +12,6 @@ export function Home(props) {
       <div id="jenca-logo-login">
         <img src={"/elements/jenca-blk.png"} alt="jenca" width="100px" />
       </div>
-      <div id ="tagline">The easy way to run BIM apps in the cloud!</div>
       <LoginForm {...props} />
     </div>
   )
