@@ -5,7 +5,7 @@ sudo: required
 services:
   - docker
 install:
-  - make developer
+  - make devimage
   - npm install
   - make test
 # Post to Slack
