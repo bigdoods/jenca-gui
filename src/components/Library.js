@@ -15,10 +15,18 @@ export default function Library(props) {
                   description={item.description} 
                   app={item} />
               </div>
+              
+              <div key={item.id} style={{textAlign:'center'}}>
+                <LibraryLink
+                  handleRun={props.handleRun} 
+                  name={item.name} 
+                  description={item.description} 
+                  app={item} />
+              </div>
             )
           })
         }
-      </div>
-	</div>
+
+	  </div>
   )
 }
