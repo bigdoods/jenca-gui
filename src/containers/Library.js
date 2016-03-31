@@ -16,7 +16,9 @@ class Library extends Component {
 
     if(props.error){
       return (
-        <div>error: {props.error}</div>
+        <div>
+          error: {props.error}
+        </div>
       )
     }
 
@@ -50,7 +52,12 @@ function mapDispatchToProps(dispatch) {
       dispatch(fetchLibrary())
     },
     handleRun:function(app){
-      dispatch(createProject(app))
+      if (app.type == "run") {
+        dispatch(createProject(app))
+      } else if (app.type == "link") {
+        window.open(app.url)
+      }
+
     }
   }
 }

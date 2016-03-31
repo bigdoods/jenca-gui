@@ -2,7 +2,15 @@ import React from 'react'
 import { Grid, Cell } from 'react-mdl'
 import RunButton from "./RunButton";
 
+const buttonTitles = {
+	run:"Add to Project",
+	link:"Open App"
+}
+
 export default function LibraryItem(props) {
+
+  var title = buttonTitles[props.app.type] || "click me"
+
   return (
 	<div id="library-item">
 		<div className="demo-card-square mdl-card mdl-shadow--2dp">
@@ -16,7 +24,8 @@ export default function LibraryItem(props) {
 		  <div id="run-button">
 		  	<RunButton 
 		  		app={props.app} 
-		  		handleRun={props.handleRun} />
+		  		handleRun={props.handleRun}
+		  		title={title} />
 		  </div>
 		</div>
     </div>
