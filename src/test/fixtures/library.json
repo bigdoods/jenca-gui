@@ -1,4 +1,120 @@
 {
+    "3drepo": {
+        "controller": {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "labels": {
+                    "name": "3drepo"
+                },
+                "name": "3drepo-controller"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "app": "3drepo"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "3drepo",
+                        "labels": {
+                            "app": "3drepo"
+                        }
+                    },
+                    "spec": {
+                        "containers": [{
+                            "name": "3drepo",
+                            "image": "3drepo",
+                            "ports": [{
+                                "containerPort": 8080
+                            }]
+                        }]
+                    }
+                }
+            }
+        },
+        "description": "3D Repoâ„¢ is a multi-award winning open source 3D BIM version control system.",
+        "service": {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": "3drepo",
+                "labels": {
+                    "app": "3drepo"
+                }
+            },
+            "spec": {
+                "type": "NodePort",
+                "ports": [{
+                    "port": 8080,
+                    "targetPort": 8080,
+                    "protocol": "TCP"
+                }],
+                "selector": {
+                    "app": "3drepo"
+                }
+            }
+        },
+        "id": "0a8e1970-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "3drepo",
+        "type": "run"
+    },
+    "aconex": {
+        "description": "Online document management, web collaboration and project management software for construction, engineering and facility management.",
+        "url": "http://www.aconex.com/login",
+        "id": "0a8e8ea1-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "aconex",
+        "type": "link"
+    },
+    "basestone": {
+        "description": "Capture, communicate and share construction data between the field and the office",
+        "url": "https://app.basestone.io/#login",
+        "id": "0a8e8ea4-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "basestone",
+        "type": "link"
+    },
+    "bimaas": {
+        "description": "BIM as a Service is the only enterprise grade open source platform for asset data integration and BIM governance.",
+        "url": "http://www.bimaas.uk/",
+        "id": "0a8e8ea6-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "bimaas",
+        "type": "link"
+    },
+    "bimanywhere": {
+        "description": "BIManywhere is a visual BIM collaboration platform for construction and facilities management.",
+        "url": "https://cpanel.bimanywhere.com/Users/login",
+        "id": "0a8e8ea7-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "bimanywhere",
+        "type": "link"
+    },
+    "bimbicycle": {
+        "description": "BIM Management just got easy. With the right tools, a truly collaborative team can be incredibly efficient and effective. We're making it easier to manage your BIM.",
+        "url": "https://bimbicycle.com/users/sign_in",
+        "id": "0a8eb5b0-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "bimbicycle",
+        "type": "link"
+    },
+    "bimcomponents": {
+        "description": "This cloud-based ArchiCAD-integrated community database collects and provides direct access to GDL elements.",
+        "url": "https://bimcomponents.com/#",
+        "id": "0a8eb5b2-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "bimcomponents",
+        "type": "link"
+    },
+    "bimer": {
+        "description": "BIMer allows you to share your BIM models online. It's easy to use and accessible via a web browser.",
+        "url": "http://bimer.eu/",
+        "id": "0a8eb5b3-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "bimer",
+        "type": "link"
+    },
+    "bimexcellence": {
+        "description": "BIMe is a research-based method to improve the BIM competency of individuals, organizations and project teams.",
+        "url": "http://bimexcellence.com/accounts/register/",
+        "id": "0a8eb5b4-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "bimexcellence",
+        "type": "link"
+    },
     "bimserver": {
         "controller": {
             "apiVersion": "v1",
@@ -22,32 +138,25 @@
                         }
                     },
                     "spec": {
-                        "containers": [
-                            {
-                                "name": "bimserver",
-                                "image": "jenca/docker-bimserver:1.4.0-FINAL-2015-11-04",
-                                "env": [
-                                    {
-                                        "name": "TOMCAT_USER",
-                                        "value": "XXX"
-                                    },
-                                    {
-                                        "name": "TOMCAT_PASSWORD",
-                                        "value": "XXX"
-                                    }
-                                ],
-                                "ports": [
-                                    {
-                                        "containerPort": 8080
-                                    }
-                                ]
-                            }
-                        ]
+                        "containers": [{
+                            "name": "bimserver",
+                            "image": "jenca/docker-bimserver:1.4.0-FINAL-2015-11-04",
+                            "env": [{
+                                "name": "TOMCAT_USER",
+                                "value": "XXX"
+                            }, {
+                                "name": "TOMCAT_PASSWORD",
+                                "value": "XXX"
+                            }],
+                            "ports": [{
+                                "containerPort": 8080
+                            }]
+                        }]
                     }
                 }
             }
         },
-        "description": "This is the description for the bimserver",
+        "description": "The Building Information Model server (BIMserver.org) platform enables you to create your own BIMserver. The software core is based on the open standard IFC and therefore knows how to handle IFC data.",
         "service": {
             "apiVersion": "v1",
             "kind": "Service",
@@ -59,20 +168,40 @@
             },
             "spec": {
                 "type": "NodePort",
-                "ports": [
-                    {
-                        "port": 8080,
-                        "targetPort": 8080,
-                        "protocol": "TCP"
-                    }
-                ],
+                "ports": [{
+                    "port": 8080,
+                    "targetPort": 8080,
+                    "protocol": "TCP"
+                }],
                 "selector": {
                     "app": "bimserver"
                 }
             }
         },
-        "id": "fa6248f0-eaba-11e5-aa74-5d34fea124fc",
-        "name": "bimserver"
+        "id": "0a8eb5b6-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "bimserver",
+        "type": "run"
+    },
+    "bimsync": {
+        "description": "Share, visualize and collaborate on BIM models, issues, documents and drawings in your browser. No plugins or installation needed.",
+        "url": "https://bimsync.com/signin",
+        "id": "0a8eb5b7-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "bimsync",
+        "type": "link"
+    },
+    "cl3ver": {
+        "description": "A platform to create and share interactive 3D presentations on any device.",
+        "url": "https://www.cl3ver.com/users/login",
+        "id": "0a8edcc3-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "cl3ver",
+        "type": "link"
+    },
+    "clara": {
+        "description": "Clara.io is a full-featured cloud-based 3D modeling, animation and rendering software tool that runs in your web browser.ï»¿",
+        "url": "https://clara.io/login",
+        "id": "0a8edcc4-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "clara",
+        "type": "link"
     },
     "duraark-system": {
         "controller": {
@@ -97,118 +226,66 @@
                         }
                     },
                     "spec": {
-                        "containers": [
-                            {
-                                "name": "duraark",
-                                "image": "duraark",
-                                "ports": [
-                                    {
-                                        "containerPort": 80
-                                    }
-                                ]
-                            }
-                        ]
+                        "containers": [{
+                            "name": "duraark",
+                            "image": "duraark",
+                            "ports": [{
+                                "containerPort": 80
+                            }]
+                        }]
                     }
                 }
             }
         },
+        "description": "DURAARK is a \"semantic building information modeling (BIM) archival and retrieval system\".",
         "docker-compose": {
             "duraark-sessions": {
                 "build": "./duraark-sessions",
-                "volumes": [
-                    "/home/martin/01_work/duraark/duraark-storage:/duraark-storage"
-                ]
+                "volumes": ["/home/martin/01_work/duraark/duraark-storage:/duraark-storage"]
             },
             "duraark-metadata": {
                 "build": "./duraark-metadata",
-                "volumes_from": [
-                    "duraark-sessions"
-                ],
-                "volumes": [
-                    "/var/run/docker.sock:/var/run/docker.sock"
-                ],
-                "environment": [
-                    "DURAARK_STORAGE_PATH=/home/martin/01_work/duraark/duraark-storage"
-                ]
+                "volumes_from": ["duraark-sessions"],
+                "volumes": ["/var/run/docker.sock:/var/run/docker.sock"],
+                "environment": ["DURAARK_STORAGE_PATH=/home/martin/01_work/duraark/duraark-storage"]
             },
             "duraark-sda": {
                 "build": "./duraark-sda",
-                "volumes": [
-                    "/var/run/docker.sock:/var/run/docker.sock"
-                ],
-                "links": [
-                    "duraark-sdas"
-                ],
-                "environment": [
-                    "DURAARK_STORAGE_PATH=/home/martin/01_work/duraark/duraark-storage"
-                ]
+                "volumes": ["/var/run/docker.sock:/var/run/docker.sock"],
+                "links": ["duraark-sdas"],
+                "environment": ["DURAARK_STORAGE_PATH=/home/martin/01_work/duraark/duraark-storage"]
             },
             "duraark-geometricenrichment": {
                 "build": "./duraark-geometricenrichment",
-                "volumes_from": [
-                    "duraark-sessions"
-                ],
-                "volumes": [
-                    "/var/run/docker.sock:/var/run/docker.sock"
-                ],
-                "environment": [
-                    "DURAARK_STORAGE_PATH=/home/martin/01_work/duraark/duraark-storage"
-                ]
+                "volumes_from": ["duraark-sessions"],
+                "volumes": ["/var/run/docker.sock:/var/run/docker.sock"],
+                "environment": ["DURAARK_STORAGE_PATH=/home/martin/01_work/duraark/duraark-storage"]
             },
             "duraark-digitalpreservation": {
                 "build": "./duraark-digitalpreservation",
-                "volumes_from": [
-                    "duraark-sessions"
-                ],
-                "links": [
-                    "duraark-metadata"
-                ],
-                "volumes": [
-                    "/tmp:/tmp"
-                ]
+                "volumes_from": ["duraark-sessions"],
+                "links": ["duraark-metadata"],
+                "volumes": ["/tmp:/tmp"]
             },
             "duraark-sdas": {
                 "image": "eccenca/virtuoso7",
-                "ports": [
-                    "8890:8890",
-                    "1111:1111"
-                ],
-                "volumes": [
-                    "../virtuoso/db:/var/lib/virtuoso/db"
-                ]
+                "ports": ["8890:8890", "1111:1111"],
+                "volumes": ["../virtuoso/db:/var/lib/virtuoso/db"]
             },
             "duraark-pointcloud-viewer": {
                 "build": "duraark-pointcloud-viewer",
-                "ports": [
-                    "5016:5016"
-                ],
-                "volumes_from": [
-                    "duraark-sessions"
-                ],
-                "volumes": [
-                    "/var/run/docker.sock:/var/run/docker.sock"
-                ]
+                "ports": ["5016:5016"],
+                "volumes_from": ["duraark-sessions"],
+                "volumes": ["/var/run/docker.sock:/var/run/docker.sock"]
             },
             "workbench-ui": {
                 "build": "./workbench-ui",
-                "environment": [
-                    "DURAARK_API_ENDPOINT=http://localhost"
-                ]
+                "environment": ["DURAARK_API_ENDPOINT=http://localhost"]
             },
             "web": {
                 "build": "./api-gatekeeper",
-                "ports": [
-                    "80:80"
-                ],
-                "links": [
-                    "duraark-sessions",
-                    "duraark-metadata",
-                    "duraark-sda",
-                    "duraark-geometricenrichment",
-                    "duraark-digitalpreservation",
-                    "duraark-pointcloud-viewer",
-                    "workbench-ui"
-                ]
+                "ports": ["80:80"],
+                "links": ["duraark-sessions", "duraark-metadata", "duraark-sda", "duraark-geometricenrichment", "duraark-digitalpreservation", "duraark-pointcloud-viewer", "workbench-ui"]
             }
         },
         "service": {
@@ -222,21 +299,19 @@
             },
             "spec": {
                 "type": "NodePort",
-                "ports": [
-                    {
-                        "port": 80,
-                        "targetPort": 80,
-                        "protocol": "TCP"
-                    }
-                ],
+                "ports": [{
+                    "port": 80,
+                    "targetPort": 80,
+                    "protocol": "TCP"
+                }],
                 "selector": {
                     "app": "duraark"
                 }
             }
         },
-        "id": "fa633350-eaba-11e5-aa74-5d34fea124fc",
+        "id": "0a8f03d0-f74f-11e5-8cd3-e59a60f88bec",
         "name": "duraark-system",
-        "description": ""
+        "type": "run"
     },
     "flarum": {
         "controller": {
@@ -261,21 +336,18 @@
                         }
                     },
                     "spec": {
-                        "containers": [
-                            {
-                                "name": "flarum",
-                                "image": "sebp/flarum",
-                                "ports": [
-                                    {
-                                        "containerPort": 80
-                                    }
-                                ]
-                            }
-                        ]
+                        "containers": [{
+                            "name": "flarum",
+                            "image": "sebp/flarum",
+                            "ports": [{
+                                "containerPort": 80
+                            }]
+                        }]
                     }
                 }
             }
         },
+        "description": "Flarum is the next-generation forum software that makes online discussion fun. It's simple, fast, and free.",
         "service": {
             "apiVersion": "v1",
             "kind": "Service",
@@ -287,21 +359,19 @@
             },
             "spec": {
                 "type": "NodePort",
-                "ports": [
-                    {
-                        "port": 80,
-                        "targetPort": 80,
-                        "protocol": "TCP"
-                    }
-                ],
+                "ports": [{
+                    "port": 80,
+                    "targetPort": 80,
+                    "protocol": "TCP"
+                }],
                 "selector": {
                     "app": "flarum"
                 }
             }
         },
-        "id": "fa63a880-eaba-11e5-aa74-5d34fea124fc",
+        "id": "0a8f2ae0-f74f-11e5-8cd3-e59a60f88bec",
         "name": "flarum",
-        "description": ""
+        "type": "run"
     },
     "ghost": {
         "controller": {
@@ -326,21 +396,18 @@
                         }
                     },
                     "spec": {
-                        "containers": [
-                            {
-                                "name": "ghost",
-                                "image": "ghost",
-                                "ports": [
-                                    {
-                                        "containerPort": 2368
-                                    }
-                                ]
-                            }
-                        ]
+                        "containers": [{
+                            "name": "ghost",
+                            "image": "ghost",
+                            "ports": [{
+                                "containerPort": 2368
+                            }]
+                        }]
                     }
                 }
             }
         },
+        "description": "Ghost is an open source publishing platform which is beautifully designed, easy to use, and free for everyone. Start a blog with Ghost today and learn to blog!",
         "service": {
             "apiVersion": "v1",
             "kind": "Service",
@@ -352,21 +419,19 @@
             },
             "spec": {
                 "type": "NodePort",
-                "ports": [
-                    {
-                        "port": 2368,
-                        "targetPort": 2368,
-                        "protocol": "TCP"
-                    }
-                ],
+                "ports": [{
+                    "port": 2368,
+                    "targetPort": 2368,
+                    "protocol": "TCP"
+                }],
                 "selector": {
                     "app": "ghost"
                 }
             }
         },
-        "id": "fa63a881-eaba-11e5-aa74-5d34fea124fc",
+        "id": "0a8f51f0-f74f-11e5-8cd3-e59a60f88bec",
         "name": "ghost",
-        "description": ""
+        "type": "run"
     },
     "limesurvey": {
         "controller": {
@@ -391,21 +456,18 @@
                         }
                     },
                     "spec": {
-                        "containers": [
-                            {
-                                "name": "limesurvey",
-                                "image": "crramirez/limesurvey",
-                                "ports": [
-                                    {
-                                        "containerPort": 80
-                                    }
-                                ]
-                            }
-                        ]
+                        "containers": [{
+                            "name": "limesurvey",
+                            "image": "crramirez/limesurvey",
+                            "ports": [{
+                                "containerPort": 80
+                            }]
+                        }]
                     }
                 }
             }
         },
+        "description": "LimeSurvey (formerly PHPSurveyor) is an Open Source PHP web application to develop, publish and collect responses to online & offline surveys.",
         "service": {
             "apiVersion": "v1",
             "kind": "Service",
@@ -417,21 +479,26 @@
             },
             "spec": {
                 "type": "NodePort",
-                "ports": [
-                    {
-                        "port": 80,
-                        "targetPort": 80,
-                        "protocol": "TCP"
-                    }
-                ],
+                "ports": [{
+                    "port": 80,
+                    "targetPort": 80,
+                    "protocol": "TCP"
+                }],
                 "selector": {
                     "app": "limesurvey"
                 }
             }
         },
-        "id": "fa63a882-eaba-11e5-aa74-5d34fea124fc",
+        "id": "0a8fc720-f74f-11e5-8cd3-e59a60f88bec",
         "name": "limesurvey",
-        "description": ""
+        "type": "run"
+    },
+    "modelo": {
+        "description": "Modelo is a web-based design project hosting and design management platform for architects and industrial designers. ",
+        "url": "https://beta.modelo.io/login",
+        "id": "0a8fee30-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "modelo",
+        "type": "link"
     },
     "owncloud": {
         "controller": {
@@ -456,21 +523,18 @@
                         }
                     },
                     "spec": {
-                        "containers": [
-                            {
-                                "name": "owncloud",
-                                "image": "owncloud",
-                                "ports": [
-                                    {
-                                        "containerPort": 80
-                                    }
-                                ]
-                            }
-                        ]
+                        "containers": [{
+                            "name": "owncloud",
+                            "image": "owncloud",
+                            "ports": [{
+                                "containerPort": 80
+                            }]
+                        }]
                     }
                 }
             }
         },
+        "description": "A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms.",
         "service": {
             "apiVersion": "v1",
             "kind": "Service",
@@ -482,21 +546,19 @@
             },
             "spec": {
                 "type": "NodePort",
-                "ports": [
-                    {
-                        "port": 80,
-                        "targetPort": 80,
-                        "protocol": "TCP"
-                    }
-                ],
+                "ports": [{
+                    "port": 80,
+                    "targetPort": 80,
+                    "protocol": "TCP"
+                }],
                 "selector": {
                     "app": "owncloud"
                 }
             }
         },
-        "id": "fa63a883-eaba-11e5-aa74-5d34fea124fc",
+        "id": "0a8fee31-f74f-11e5-8cd3-e59a60f88bec",
         "name": "owncloud",
-        "description": ""
+        "type": "run"
     },
     "redmine": {
         "controller": {
@@ -521,21 +583,18 @@
                         }
                     },
                     "spec": {
-                        "containers": [
-                            {
-                                "name": "redmine",
-                                "image": "redmine",
-                                "ports": [
-                                    {
-                                        "containerPort": 3000
-                                    }
-                                ]
-                            }
-                        ]
+                        "containers": [{
+                            "name": "redmine",
+                            "image": "redmine",
+                            "ports": [{
+                                "containerPort": 3000
+                            }]
+                        }]
                     }
                 }
             }
         },
+        "description": "Redmine is a flexible project management web application. Written using the Ruby on Rails framework, it is cross-platform and cross-database.",
         "service": {
             "apiVersion": "v1",
             "kind": "Service",
@@ -547,21 +606,26 @@
             },
             "spec": {
                 "type": "NodePort",
-                "ports": [
-                    {
-                        "port": 3000,
-                        "targetPort": 3000,
-                        "protocol": "TCP"
-                    }
-                ],
+                "ports": [{
+                    "port": 3000,
+                    "targetPort": 3000,
+                    "protocol": "TCP"
+                }],
                 "selector": {
                     "app": "redmine"
                 }
             }
         },
-        "id": "fa63cf90-eaba-11e5-aa74-5d34fea124fc",
+        "id": "0a8fee36-f74f-11e5-8cd3-e59a60f88bec",
         "name": "redmine",
-        "description": ""
+        "type": "run"
+    },
+    "rendra": {
+        "description": "Keep a real-time overview of the project along the way to achieve the structured process that increases profitability.",
+        "url": "https://portal.o.rendra.io/login",
+        "id": "0a901540-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "rendra",
+        "type": "link"
     },
     "rocketchat": {
         "controller": {
@@ -586,21 +650,18 @@
                         }
                     },
                     "spec": {
-                        "containers": [
-                            {
-                                "name": "rocketchat",
-                                "image": "rocketchat",
-                                "ports": [
-                                    {
-                                        "containerPort": 80
-                                    }
-                                ]
-                            }
-                        ]
+                        "containers": [{
+                            "name": "rocketchat",
+                            "image": "rocketchat",
+                            "ports": [{
+                                "containerPort": 80
+                            }]
+                        }]
                     }
                 }
             }
         },
+        "description": "From group messages and video calls all the way to helpdesk killer features.\nOur goal is to become the number one cross-platform open source chat solution.",
         "service": {
             "apiVersion": "v1",
             "kind": "Service",
@@ -612,21 +673,26 @@
             },
             "spec": {
                 "type": "NodePort",
-                "ports": [
-                    {
-                        "port": 80,
-                        "targetPort": 80,
-                        "protocol": "TCP"
-                    }
-                ],
+                "ports": [{
+                    "port": 80,
+                    "targetPort": 80,
+                    "protocol": "TCP"
+                }],
                 "selector": {
                     "app": "rocketchat"
                 }
             }
         },
-        "id": "fa63cf91-eaba-11e5-aa74-5d34fea124fc",
+        "id": "0a901541-f74f-11e5-8cd3-e59a60f88bec",
         "name": "rocketchat",
-        "description": ""
+        "type": "run"
+    },
+    "sitediary": {
+        "description": "Mobile Site Diary replaces the existing paper site diary, daily records or site journal, where site engineers record events that have happened on their projects.",
+        "url": "https://signup.mobilesitediary.com/",
+        "id": "0a901542-f74f-11e5-8cd3-e59a60f88bec",
+        "name": "sitediary",
+        "type": "link"
     },
     "wordpress": {
         "controller": {
@@ -651,21 +717,18 @@
                         }
                     },
                     "spec": {
-                        "containers": [
-                            {
-                                "name": "wordpress",
-                                "image": "wordpress",
-                                "ports": [
-                                    {
-                                        "containerPort": 8080
-                                    }
-                                ]
-                            }
-                        ]
+                        "containers": [{
+                            "name": "wordpress",
+                            "image": "wordpress",
+                            "ports": [{
+                                "containerPort": 8080
+                            }]
+                        }]
                     }
                 }
             }
         },
+        "description": "WordPress is web software you can use to create a beautiful website, blog, or app. We like to say that WordPress is both free and priceless at the same time.",
         "service": {
             "apiVersion": "v1",
             "kind": "Service",
@@ -677,20 +740,18 @@
             },
             "spec": {
                 "type": "NodePort",
-                "ports": [
-                    {
-                        "port": 8080,
-                        "targetPort": 8080,
-                        "protocol": "TCP"
-                    }
-                ],
+                "ports": [{
+                    "port": 8080,
+                    "targetPort": 8080,
+                    "protocol": "TCP"
+                }],
                 "selector": {
                     "app": "wordpress"
                 }
             }
         },
-        "id": "fa63cf92-eaba-11e5-aa74-5d34fea124fc",
+        "id": "0a901544-f74f-11e5-8cd3-e59a60f88bec",
         "name": "wordpress",
-        "description": ""
+        "type": "run"
     }
 }

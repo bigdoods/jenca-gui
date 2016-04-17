@@ -19,6 +19,6 @@ export default function Library(props) {
           })
         }
       </div>
-	</div>
+	  </div>
   )
 }
